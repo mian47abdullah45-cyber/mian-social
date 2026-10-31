@@ -11,84 +11,41 @@
 body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 #map{height:100vh;width:100vw;z-index:1;filter:invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);}
 .top-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.9);padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
-.logo{font-weight:900;font-size:22px}
+.logo{font-weight:900;font-size:22px;line-height:1}
+.logo span{display:block;font-size:9px;font-weight:400;letter-spacing:1px;color:#888;margin-top:2px;text-transform:uppercase}
 .live-count{background:#fff;color:#000;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
-.tap-card{position:fixed;bottom:20px;left:10px;right:10px;z-index:1000;background:#111;border:1px solid #333;border-radius:20px;padding:15px;display:none}
+.creator-badge{position:fixed;bottom:75px;left:10px;z-index:999;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);padding:6px 12px;border-radius:20px;font-size:10px;color:#aaa;letter-spacing:0.5px}
+.tap-card{position:fixed;bottom:105px;left:10px;right:10px;z-index:1000;background:#111;border:1px solid #333;border-radius:20px;padding:15px;display:none}
 .tap-card.show{display:block}
 .tap-img{width:100%;height:220px;object-fit:cover;border-radius:15px;background:#222}
-.tap-info{display:flex;justify-content:space-between;margin-top:12px;align-items:center}
-.tap-place{font-size:16px;font-weight:bold}
-.tap-time{font-size:12px;color:#888}
-.actions{display:flex;gap:10px;margin-top:12px}
-.btn{flex:1;padding:12px;border-radius:25px;border:none;font-weight:bold;cursor:pointer}
-.btn-stay{background:#fff;color:#000}
-.btn-next{background:#222;color:#fff;border:1px solid #444}
-.heart-btn{background:transparent;border:none;font-size:28px;cursor:pointer;color:#444}
-.heart-btn.liked{color:#ff1744 !important}
-.upload-btn{position:fixed;bottom:90px;right:20px;z-index:999;background:#fff;color:#000;width:60px;height:60px;border-radius:50%;border:none;font-size:28px;font-weight:bold;cursor:pointer}
+.upload-btn{position:fixed;bottom:160px;right:20px;z-index:999;background:#fff;color:#000;width:60px;height:60px;border-radius:50%;border:none;font-size:28px;font-weight:bold}
 </style>
 </head>
 <body>
 <div class="top-bar">
-<div class="logo">WORLD TAP</div>
-<div class="live-count">● <span id="liveNum">1,214</span> LIVE NOW</div>
+<div class="logo">WORLD TAP <span>Sode Pede Main Abdullah Gulzar ❤️</span></div>
+<div class="live-count">● <span id="liveNum">1,484</span> LIVE</div>
 </div>
 <div id="map"></div>
+<div class="creator-badge">Sode Pede Main Abdullah Gulzar • Khwazakhela</div>
 <button class="upload-btn" onclick="uploadTap()">+</button>
 <div class="tap-card" id="tapCard">
 <img id="tapImg" class="tap-img" src="">
-<div class="tap-info">
-<div>
-<div class="tap-place" id="tapPlace">Khwazakhela, Pakistan</div>
-<div class="tap-time" id="tapTime">5 sec ago</div>
-</div>
-<button class="heart-btn" id="heartBtn" onclick="likeTap()">♥</button>
-</div>
-<div class="actions">
-<button class="btn btn-stay" onclick="stayHere()">STAY & CHAT</button>
-<button class="btn btn-next" onclick="nextTap()">NEXT WORLD →</button>
-</div>
+<div style="display:flex;justify-content:space-between;margin-top:12px"><div><div style="font-weight:bold" id="tapPlace">Near This Area</div><div style="font-size:12px;color:#888" id="tapTime">7 sec ago</div></div><button id="heartBtn" style="background:transparent;border:none;font-size:28px;color:#444" onclick="likeTap()">♥</button></div>
+<div style="display:flex;gap:10px;margin-top:12px"><button style="flex:1;padding:12px;border-radius:25px;border:none;font-weight:bold;background:#fff;color:#000" onclick="stayHere()">STAY & CHAT</button><button style="flex:1;padding:12px;border-radius:25px;border:1px solid #444;background:#222;color:#fff" onclick="nextTap()">NEXT WORLD →</button></div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 var map = L.map('map', {zoomControl:false, minZoom:2}).setView([34, 72], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
-
-var taps = [
-{lat:34.0,lng:72.0,place:"Khwazakhela, Pakistan",img:"https://picsum.photos/500/300?random=1",time:"5 sec ago"},
-{lat:24.8,lng:67.0,place:"Karachi, Pakistan",img:"https://picsum.photos/500/300?random=2",time:"7 sec ago"},
-{lat:40.7,lng:-74.0,place:"New York, USA",img:"https://picsum.photos/500/300?random=3",time:"3 sec ago"},
-{lat:35.6,lng:139.6,place:"Tokyo, Japan",img:"https://picsum.photos/500/300?random=4",time:"9 sec ago"},
-{lat:51.5,lng:-0.12,place:"London, UK",img:"https://picsum.photos/500/300?random=5",time:"15 sec ago"},
-{lat:33.6,lng:73.0,place:"Islamabad, Pakistan",img:"https://picsum.photos/500/300?random=6",time:"12 sec ago"},
-{lat:31.5,lng:74.3,place:"Lahore, Pakistan",img:"https://picsum.photos/500/300?random=7",time:"6 sec ago"}
-];
-
-function showRandomTap(latlng){
-var t = taps[Math.floor(Math.random()*taps.length)];
-if(latlng){ t = {...t, place:"Near This Area", lat:latlng.lat, lng:latlng.lng}; }
-document.getElementById('tapImg').src=t.img;
-document.getElementById('tapPlace').innerText=t.place;
-document.getElementById('tapTime').innerText=t.time;
-document.getElementById('tapCard').classList.add('show');
-document.getElementById('heartBtn').classList.remove('liked');
-map.flyTo([t.lat,t.lng],5);
-}
-map.on('click', function(e){ showRandomTap(e.latlng); });
-function nextTap(){ showRandomTap(); }
-function stayHere(){ alert('Chat Feature - Is se log ghanto time spend karenge! Next update me chat add karenge.'); }
-function likeTap(){
-var btn=document.getElementById('heartBtn');
-btn.classList.toggle('liked');
-}
-function uploadTap(){
-var newTap = {lat:34.0+Math.random(),lng:72.0+Math.random(),place:"You - Khwazakhela",img:"https://picsum.photos/500/300?random="+Math.floor(Math.random()*100),time:"Just now"};
-taps.unshift(newTap);
-showRandomTap(newTap);
-alert('Wah Mian! Aapka Tap Live Ho Gaya!');
-}
+var taps=[{lat:34,lng:72,place:"Khwazakhela, Pakistan",img:"https://picsum.photos/500/300?random=1",time:"5 sec ago"},{lat:24.8,lng:67,place:"Karachi, Pakistan",img:"https://picsum.photos/500/300?random=2",time:"7 sec ago"},{lat:40.7,lng:-74,place:"New York, USA",img:"https://picsum.photos/500/300?random=3",time:"3 sec ago"},{lat:35.6,lng:139.6,place:"Tokyo, Japan",img:"https://picsum.photos/500/300?random=4",time:"9 sec ago"},{lat:51.5,lng:-0.12,place:"London, UK",img:"https://picsum.photos/500/300?random=5",time:"15 sec ago"}];
+function showRandomTap(latlng){var t=taps[Math.floor(Math.random()*taps.length)];if(latlng){t={...t,place:"Near This Area",lat:latlng.lat,lng:latlng.lng};}document.getElementById('tapImg').src=t.img;document.getElementById('tapPlace').innerText=t.place;document.getElementById('tapTime').innerText=t.time;document.getElementById('tapCard').classList.add('show');}
+map.on('click',function(e){showRandomTap(e.latlng);});
+function nextTap(){showRandomTap();}
+function stayHere(){alert('Sode Pede Main Abdullah Gulzar ka World Tap - Chat jald ayega!');}
+function likeTap(){var b=document.getElementById('heartBtn');b.style.color=b.style.color=='rgb(255, 23, 68)'?'#444':'#ff1744';}
+function uploadTap(){var n={lat:34+Math.random(),lng:72+Math.random(),place:"You - Khwazakhela",img:"https://picsum.photos/500/300?random="+Math.floor(Math.random()*100),time:"Just now"};taps.unshift(n);showRandomTap(n);}
 setTimeout(()=>{showRandomTap();},1000);
-setInterval(()=>{document.getElementById('liveNum').innerText = Math.floor(1200+Math.random()*500).toLocaleString();},3000);
 </script>
 </body>
 </html>
