@@ -1,24 +1,111 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mian Social</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}body{background:#000;color:#fff;height:100vh;overflow:hidden}#splash{position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center}#logo{width:110px;height:110px;background:#fff;color:#000;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800}.name{font-size:26px;font-weight:800;margin-top:18px}.by{color:#888;font-size:14px;margin-top:4px}.pic{width:90px;height:90px;border-radius:50%;background:#222;border:3px solid #fff;margin-top:18px;display:flex;align-items:center;justify-content:center;font-size:36px;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover}.line{width:180px;height:3px;background:#222;margin-top:30px;border-radius:10px;overflow:hidden}.fill{height:100%;background:#fff;width:0%;animation:load 5s linear forwards}@keyframes load{to{width:100%}}#app{display:none;position:fixed;inset:0;background:#000;flex-direction:column}.top{height:52px;border-bottom:1px solid #111;display:flex;align-items:center;justify-content:space-between;padding:0 14px}.content{flex:1;overflow:auto;padding-bottom:70px}.tab{display:none}.tab.active{display:block}.card{border-bottom:1px solid #111;padding:12px}.head{display:flex;gap:10px;align-items:center}.av{width:32px;height:32px;border-radius:50%;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-weight:800}.actions{font-size:22px;display:flex;gap:16px;margin-top:10px}.bottom{position:fixed;bottom:0;left:0;right:0;height:60px;background:#000;border-top:1px solid #111;display:flex;justify-content:space-around;align-items:center}.nav{color:#666;font-size:22px;text-align:center;cursor:pointer}.nav.active{color:#fff}.nav span{font-size:10px;display:block}.btn{width:100%;background:#fff;color:#000;border:none;padding:15px;border-radius:30px;font-weight:700;margin-top:18px}.input{width:100%;background:#111;border:1px solid #222;border-radius:14px;padding:15px;margin-top:12px;color:#fff}.gbtn{width:100%;background:#fff;color:#000;border:none;padding:14px;border-radius:30px;font-weight:600;margin-top:20px}</style></head><body>
-<div id="splash"><div id="logo">MS</div><div class="name">MIAN SOCIAL</div><div class="by">By Mian Abdullah Gulzar</div><div class="pic">👑</div><div class="line"><div class="fill"></div></div><div style="color:#555;font-size:12px;margin-top:10px" id="txt">Loading 0%</div></div>
-<div id="app"><div class="top"><b>MIAN SOCIAL</b><div>🔍 ✉️</div></div><div class="content">
-<div id="tab-home" class="tab active"><div id="feed"></div></div>
-<div id="tab-reels" class="tab"><div style="text-align:center;padding:20px"><h2>REELS - TikTok Style</h2><p style="color:#888;margin-top:10px">Aapki videos yahan aayengi</p><div id="reels"></div></div></div>
-<div id="tab-upload" class="tab"><div style="padding:20px;text-align:center"><h2>Upload Video</h2><p style="color:#888">Direct Upload - No Error</p><div style="border:2px dashed #222;border-radius:18px;padding:40px;margin-top:20px" onclick="document.getElementById('f').click()"><div style="font-size:40px">📤</div><div>Tap to Upload</div><input type="file" id="f" hidden accept="video/*,image/*" onchange="up(this)"></div><div id="prev"></div></div></div>
-<div id="tab-profile" class="tab"><div style="text-align:center;padding:20px"><div style="width:90px;height:90px;background:#fff;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800;margin:0 auto">M</div><h2 id="pname" style="margin-top:12px">Mian Abdullah</h2><p style="color:#888">@mianabdullah</p><div style="display:flex;justify-content:center;gap:30px;margin-top:15px"><div><b id="pc">0</b><br><span style="color:#888;font-size:12px">Posts</span></div><div><b>1.2K</b><br><span style="color:#888;font-size:12px">Followers</span></div><div><b>180</b><br><span style="color:#888;font-size:12px">Following</span></div></div></div><div id="grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px"></div></div>
-</div><div class="bottom"><div class="nav active" onclick="tab('home',this)">🏠<span>Home</span></div><div class="nav" onclick="tab('reels',this)">🎬<span>Reels</span></div><div class="nav" onclick="tab('upload',this)">➕<span>Post</span></div><div class="nav" onclick="tab('profile',this)">👤<span>Profile</span></div></div></div>
-<div id="login" style="position:fixed;inset:0;background:#000;display:none;align-items:center;justify-content:center;padding:20px;z-index:100"><div style="width:100%;max-width:380px;text-align:center"><div style="width:70px;height:70px;background:#fff;color:#000;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;margin:0 auto">MS</div><h1 style="margin-top:15px">Welcome</h1><p style="color:#888;margin-top:6px">Mian Social LIVE 🔥</p><button class="gbtn" onclick="go()">Continue with Google</button><div style="color:#666;margin:18px 0;font-size:12px">— OR —</div><input id="e" class="input" placeholder="Email"><input id="p" class="input" type="password" placeholder="Password"><button class="btn" onclick="go()">Log In - Direct</button></div></div>
-<script>
-let c=0;let t=setInterval(()=>{c+=2;document.getElementById('txt').innerText=c+'% Loading...';if(c>=100)clearInterval(t);},90);
-setTimeout(()=>{
-document.getElementById('splash').style.display='none';
-if(localStorage.getItem('ms_user')){document.getElementById('app').style.display='flex';render();}
-else{document.getElementById('login').style.display='flex';}
-},5200);
-let posts=JSON.parse(localStorage.getItem('ms_posts')||'[]');if(posts.length==0){posts=[{u:'Abdullah Mian',txt:'Meri app LIVE! Welcome to Mian Social 🔥',l:124},{u:'Mian Social',txt:'Reels added! 🎥',l:89}];}
-function go(){let e=document.getElementById('e').value||'Mian Abdullah';localStorage.setItem('ms_user',e);document.getElementById('login').style.display='none';document.getElementById('app').style.display='flex';render();}
-function tab(id,el){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
-function render(){let h='';posts.forEach((p,i)=>{h+=`<div class=card><div class=head><div class=av>${p.u[0]}</div><b>${p.u}</b></div>${p.src? (p.type=='video'? `<video src="${p.src}" style="width:100%;margin-top:10px;border-radius:12px" controls></video>`:`<img src="${p.src}" style="width:100%;margin-top:10px;border-radius:12px">`):`<div style="font-size:40px;padding:20px;text-align:center">🔥</div>`}<div class=actions><span onclick="like(${i})">❤️</span><span>💬</span><span>✈️</span></div><div><b>${p.l} likes</b> - ${p.txt}</div></div>`;});document.getElementById('feed').innerHTML=h;document.getElementById('pc').innerText=posts.length;let g='';posts.forEach(p=>{g+=`<div style="aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center">${p.type?'🎥':'🔥'}</div>`;});document.getElementById('grid').innerHTML=g;}
-function like(i){posts[i].l++;localStorage.setItem('ms_posts',JSON.stringify(posts));render();}
-function up(inp){let file=inp.files[0];if(!file)return;let r=new FileReader();r.onload=e=>{let isV=file.type.startsWith('video');posts.unshift({u:localStorage.getItem('ms_user')||'Mian',txt:isV?'New Video 🚀':'New Photo 📸',l:0,src:e.target.result,type:isV?'video':'image'});localStorage.setItem('ms_posts',JSON.stringify(posts));document.getElementById('prev').innerHTML='<div style="color:#0f0;margin-top:10px">✅ Uploaded! No Error!</div>';render();tab('home',document.querySelectorAll('.nav')[0]);};r.readAsDataURL(file);}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tap - Tap The World</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
+#map{height:100vh;width:100vw;z-index:1}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.85);padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.logo{font-weight:900;font-size:22px;letter-spacing:1px}
+.logo span{color:#fff}.logo b{color:#888}
+.live-count{background:#fff;color:#000;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.tap-card{position:fixed;bottom:20px;left:10px;right:10px;z-index:1000;background:#111;border:1px solid #333;border-radius:20px;padding:15px;display:none;max-height:75vh}
+.tap-card.show{display:block}
+.tap-img{width:100%;height:220px;object-fit:cover;border-radius:15px;background:#222}
+.tap-info{display:flex;justify-content:space-between;margin-top:12px;align-items:center}
+.tap-place{font-size:16px;font-weight:bold}
+.tap-time{font-size:12px;color:#888}
+.actions{display:flex;gap:10px;margin-top:12px}
+.btn{flex:1;padding:12px;border-radius:25px;border:none;font-weight:bold;cursor:pointer}
+.btn-stay{background:#fff;color:#000}
+.btn-next{background:#222;color:#fff;border:1px solid #444}
+.heart-btn{background:transparent;border:none;font-size:28px;cursor:pointer;color:#444}
+.heart-btn.liked{color:#ff1744}
+.upload-btn{position:fixed;bottom:90px;right:20px;z-index:999;background:#fff;color:#000;width:60px;height:60px;border-radius:50%;border:none;font-size:28px;font-weight:bold;cursor:pointer;box-shadow:0 4px 20px rgba(255,255,255,0.3)}
+</style>
+</head>
+<body>
 
+<div class="top-bar">
+<div class="logo"><span>WORLD</span> <b>TAP</b></div>
+<div class="live-count">● <span id="liveNum">1,247</span> LIVE NOW</div>
+</div>
+
+<div id="map"></div>
+
+<button class="upload-btn" onclick="uploadTap()">+</button>
+
+<div class="tap-card" id="tapCard">
+<img id="tapImg" class="tap-img" src="">
+<div class="tap-info">
+<div>
+<div class="tap-place" id="tapPlace">Swat, Pakistan</div>
+<div class="tap-time" id="tapTime">7 sec ago • Tap to see more</div>
+</div>
+<button class="heart-btn" id="heartBtn" onclick="likeTap()">♥</button>
+</div>
+<div class="actions">
+<button class="btn btn-stay" onclick="stayHere()">STAY & CHAT</button>
+<button class="btn btn-next" onclick="nextTap()">NEXT WORLD →</button>
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// MAP SETUP - Black & White Style
+var map = L.map('map', {zoomControl:false, minZoom:2}).setView([30, 70], 3);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+
+var taps = [
+{lat:34.0,lng:72.0,place:"Khwazakhela, Pakistan",img:"https://images.unsplash.com/photo-1516900448136-be1a5fbeb72e?w=500",time:"5 sec ago"},
+{lat:35.9,lng:74.3,place:"Gilgit, Pakistan",img:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500",time:"12 sec ago"},
+{lat:24.8,lng:67.0,place:"Karachi, Pakistan",img:"https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500",time:"7 sec ago"},
+{lat:40.7,lng:-74.0,place:"New York, USA",img:"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500",time:"3 sec ago"},
+{lat:35.6,lng:139.6,place:"Tokyo, Japan",img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500",time:"9 sec ago"},
+{lat:51.5,lng:-0.12,place:"London, UK",img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500",time:"15 sec ago"},
+{lat:-33.8,lng:151.2,place:"Sydney, Australia",img:"https://images.unsplash.com/photo-1523428096881-5bd79d043006?w=500",time:"20 sec ago"},
+{lat:19.0,lng:72.8,place:"Mumbai, India",img:"https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?w=500",time:"6 sec ago"}
+];
+
+function showRandomTap(latlng){
+var t = taps[Math.floor(Math.random()*taps.length)];
+if(latlng){t.place = "Near You"; t.lat=latlng.lat; t.lng=latlng.lng;}
+document.getElementById('tapImg').src=t.img;
+document.getElementById('tapPlace').innerText=t.place;
+document.getElementById('tapTime').innerText=t.time;
+document.getElementById('tapCard').classList.add('show');
+document.getElementById('heartBtn').classList.remove('liked');
+map.flyTo([t.lat,t.lng],5);
+}
+
+map.on('click', function(e){ showRandomTap(e.latlng); });
+
+function nextTap(){ showRandomTap(); }
+function stayHere(){ alert('Chat Feature - Coming Soon! User se baat kar sakte ho. Is feature se log ghanto time spend karenge!'); }
+function likeTap(){
+var btn=document.getElementById('heartBtn');
+btn.classList.toggle('liked');
+if(btn.classList.contains('liked')){btn.style.color='#ff1744';} else {btn.style.color='#444';}
+}
+function uploadTap(){
+var url = prompt('Apni 7 sec ki photo ka Link dalo (Unsplash se) ya OK dabao demo ke liye:');
+if(url!==null){
+var newTap = {lat:34.0+Math.random(),lng:72.0+Math.random(),place:"You - Khwazakhela",img:url||"https://images.unsplash.com/photo-1516900448136-be1a5fbeb72e?w=500",time:"Just now"};
+taps.unshift(newTap);
+showRandomTap(newTap);
+alert('Wah Mian! Aapka Tap Live Ho Gaya! Ab puri dunia aapko dekhegi!');
+}
+}
+
+// Auto show first tap after 2 sec
+setTimeout(()=>{showRandomTap();},1500);
+// Live counter animation
+setInterval(()=>{document.getElementById('liveNum').innerText = Math.floor(1200+Math.random()*500).toLocaleString();},3000);
+</script>
+</body>
+</html>
