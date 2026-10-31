@@ -6,69 +6,105 @@
 <title>World Tap - Swat</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#000;color:#fff;font-family:Arial;overflow:hidden;height:100vh}
-#map{height:calc(100vh - 120px);width:100vw;z-index:1;filter:invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);}
-.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.95);padding:10px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:#000;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222;height:55px}
 .logo{font-weight:900;font-size:18px;line-height:1}
-.logo span{font-size:8px;color:#888;display:block;letter-spacing:0.8px}
-.page{display:none;height:calc(100vh - 60px);overflow:auto;padding-top:50px;padding-bottom:70px}
+.logo span{font-size:8px;color:#888;display:block}
+#map{position:absolute;top:55px;bottom:60px;left:0;right:0;z-index:1;background:#111}
+.page{display:none;position:absolute;top:55px;bottom:60px;left:0;right:0;overflow:auto;background:#000;z-index:2}
 .page.active{display:block}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0 12px 0}
-.nav-item{flex:1;text-align:center;color:#666;font-size:10px;cursor:pointer;transition:0.2s}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0 12px 0;height:60px}
+.nav-item{flex:1;text-align:center;color:#666;font-size:10px;cursor:pointer}
 .nav-item.active{color:#fff}
 .nav-item b{font-size:22px;display:block}
-.tap-card{position:fixed;bottom:80px;left:10px;right:10px;z-index:1000;background:#111;border:1px solid #333;border-radius:20px;padding:12px;display:none}
+.tap-card{position:fixed;bottom:70px;left:10px;right:10px;z-index:10000;background:#111;border:1px solid #333;border-radius:20px;padding:12px;display:none}
 .tap-card.show{display:block}
-.creator-badge{position:fixed;bottom:85px;left:10px;z-index:998;background:rgba(255,255,255,0.1);padding:5px 10px;border-radius:20px;font-size:9px;color:#aaa}
-/* Shorts Page */
-.shorts-container{scroll-snap-type:y mandatory;height:calc(100vh - 110px);overflow-y:scroll}
-.short-item{scroll-snap-align:start;height:calc(100vh - 110px);position:relative;background:#111;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #222}
+.creator-badge{position:fixed;bottom:75px;left:10px;z-index:998;background:rgba(0,0,0,0.8);padding:6px 12px;border-radius:20px;font-size:9px;color:#fff;border:1px solid #333}
+.shorts-container{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory}
+.short-item{height:100%;scroll-snap-align:start;position:relative;background:#000;display:flex;align-items:center;justify-content:center}
 .short-item img{width:100%;height:100%;object-fit:cover}
-.short-info{position:absolute;bottom:20px;left:15px;right:70px}
-.short-actions{position:absolute;right:15px;bottom:80px;display:flex;flex-direction:column;gap:20px;text-align:center}
-.action-btn{font-size:28px;line-height:1}
-.action-btn span{font-size:11px;display:block;margin-top:4px}
-/* Messages */
-.msg-item{padding:15px;border-bottom:1px solid #111;display:flex;gap:12px;align-items:center}
-.msg-item img{width:50px;height:50px;border-radius:50%}
-.msg-item .dot{width:10px;height:10px;background:#0f0;border-radius:50%;margin-left:auto}
-/* Profile */
-.profile-header{text-align:center;padding:30px 20px}
-.profile-header img{width:90px;height:90px;border-radius:50%;border:3px solid #fff}
-.google-btn{background:#fff;color:#000;padding:14px 20px;border-radius:30px;border:none;font-weight:bold;width:90%;margin:20px auto;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px}
-.stat-row{display:flex;justify-content:space-around;padding:20px;border-top:1px solid #111;border-bottom:1px solid #111;margin-top:10px}
+.short-info{position:absolute;bottom:20px;left:15px;right:70px;text-shadow:0 2px 10px #000}
+.short-actions{position:absolute;right:12px;bottom:60px;display:flex;flex-direction:column;gap:18px;text-align:center}
+.msg-item{padding:14px;border-bottom:1px solid #111;display:flex;gap:12px;align-items:center}
+.profile-header{text-align:center;padding:25px 20px}
+.google-btn{background:#fff;color:#000;padding:14px 20px;border-radius:30px;border:none;font-weight:bold;width:90%;margin:20px auto;display:flex;align-items:center;justify-content:center;gap:10px}
 </style>
 </head>
 <body>
-
 <div class="top-bar">
 <div class="logo">WORLD TAP <span>Sode Pede Main Abdullah Gulzar • Swat 🏔️</span></div>
-<div style="font-size:11px;background:#fff;color:#000;padding:4px 10px;border-radius:15px;font-weight:bold">● <span id="liveNum">2,104</span> LIVE</div>
+<div style="font-size:11px;background:#fff;color:#000;padding:4px 10px;border-radius:15px;font-weight:bold">● 2,104 LIVE</div>
 </div>
 
-<!-- PAGE 1: MAP -->
-<div id="page-map" class="page active">
 <div id="map"></div>
-<div class="creator-badge">🏔️ Swat - Abdullah Gulzar</div>
-<div class="tap-card" id="tapCard">
-<span id="countryTag" style="background:#fff;color:#000;padding:3px 8px;border-radius:10px;font-size:10px;font-weight:bold">🇵🇰 PAKISTAN CHAT</span>
-<img id="tapImg" style="width:100%;height:150px;object-fit:cover;border-radius:12px;margin-top:8px" src="">
-<div style="display:flex;justify-content:space-between;margin-top:8px"><b id="tapPlace">Swat, Pakistan</b><span id="tapTime" style="font-size:11px;color:#888">Just now</span></div>
-<button onclick="document.getElementById('tapCard').classList.remove('show')" style="width:100%;margin-top:10px;padding:10px;border-radius:20px;border:none;background:#fff;color:#000;font-weight:bold">CLOSE & EXPLORE</button>
-</div>
-</div>
 
-<!-- PAGE 2: SHORT VIDEOS / LOGO -->
 <div id="page-shorts" class="page">
 <div class="shorts-container" id="shortsContainer"></div>
 </div>
 
-<!-- PAGE 3: MESSAGES -->
-<div id="page-messages" class="page" style="padding:15px;padding-top:60px">
+<div id="page-messages" class="page" style="padding:15px">
 <h2 style="margin-bottom:15px">Messages 💬</h2>
-<div id="msgList">
-<div class="msg-item" onclick="switchPage('map')"><img src="https://picsum.photos/100/100?random=10"><div><b>Swat Chat 🇵🇰</b><div style="font-size:12px;color:#888">Ali: Sode pede, Swat se kon hai?</div></div><div class="dot"></div></div>
-<div class="msg-item" onclick="switchPage('map')"><img src="https://picsum.photos/100/100?random=11"><div><b>USA Chat 🇺🇸</b><div style="font-size:12px;color:#888">John: Hello from NY!</div></div><div class="
+<div class="msg-item"><img src="https://picsum.photos/100/100?random=10" style="width:50px;height:50px;border-radius:50%"><div><b>Swat Chat 🇵🇰</b><div style="font-size:12px;color:#888">Ali: Sode pede, Swat se kon hai?</div></div></div>
+<div class="msg-item"><img src="https://picsum.photos/100/100?random=11" style="width:50px;height:50px;border-radius:50%"><div><b>USA Chat 🇺🇸</b><div style="font-size:12px;color:#888">John: Hello from NY!</div></div></div>
+<div class="msg-item"><img src="https://picsum.photos/100/100?random=12" style="width:50px;height:50px;border-radius:50%"><div><b>India Chat 🇮🇳</b><div style="font-size:12px;color:#888">Rahul: Namaste!</div></div></div>
+</div>
+
+<div id="page-profile" class="page">
+<div class="profile-header">
+<img id="profilePic" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style="width:90px;height:90px;border-radius:50%;border:3px solid #fff">
+<h2 id="profileName" style="margin-top:15px">Guest User</h2>
+<p id="profileEmail" style="color:#888;font-size:13px;margin-top:5px">Not logged in</p>
+<p style="margin-top:8px;font-size:12px;color:#aaa">Sode Pede Main Abdullah Gulzar • Swat Valley 🏔️</p>
+<div id="googleLoginArea">
+<button class="google-btn" onclick="googleLogin()"><img src="https://www.google.com/favicon.ico" style="width:18px"> Continue with Google</button>
+<p style="font-size:11px;color:#666;margin-top:10px">Direct Google Login - No password</p>
+</div>
+</div>
+</div>
+
+<div class="tap-card" id="tapCard">
+<span id="countryTag" style="background:#fff;color:#000;padding:3px 8px;border-radius:10px;font-size:10px;font-weight:bold">🇵🇰 PAKISTAN CHAT</span>
+<img id="tapImg" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-top:8px" src="">
+<div style="display:flex;justify-content:space-between;margin-top:8px"><b id="tapPlace">Swat, Pakistan</b><span id="tapTime" style="font-size:11px;color:#888">Just now</span></div>
+<button onclick="document.getElementById('tapCard').classList.remove('show')" style="width:100%;margin-top:10px;padding:10px;border-radius:20px;border:none;background:#fff;color:#000;font-weight:bold">CLOSE</button>
+</div>
+
+<div class="creator-badge">🏔️ Swat - Abdullah Gulzar</div>
+
+<div class="bottom-nav">
+<div class="nav-item active" id="nav-map" onclick="switchPage('map')"><b>🗺️</b>Map</div>
+<div class="nav-item" id="nav-shorts" onclick="switchPage('shorts')"><b>▶️</b>Shorts</div>
+<div class="nav-item" id="nav-messages" onclick="switchPage('messages')"><b>💬</b>Messages</div>
+<div class="nav-item" id="nav-profile" onclick="switchPage('profile')"><b>👤</b>Profile</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var map = L.map('map', {zoomControl:false, minZoom:2}).setView([34.8, 72.3], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
+
+function switchPage(p){
+document.querySelectorAll('.page').forEach(el=>el.style.display='none');
+document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+if(p==='map'){
+document.getElementById('map').style.display='block';
+setTimeout(()=>{map.invalidateSize();},100);
+}else{
+document.getElementById('map').style.display='none';
+document.getElementById('page-'+p).style.display='block';
+document.getElementById('page-'+p).classList.add('active');
+}
+document.getElementById('nav-'+p).classList.add('active');
+if(p==='shorts' && !window.shortsLoaded){loadShorts();window.shortsLoaded=true;}
+}
+
+function showTap(place,country,flag,img){
+document.getElementById('tapImg').src=img;
+document.getElementById('tapPlace').innerText=place;
+document.getElementById('countryTag').innerText=flag+" "+country.toUpperCase()+" CHAT";
+document.getElementById('tapCard').classList.add('show');
+}
+
+map.on('click',function(e
