@@ -1,32 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mian Social</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mian Social - By Abdullah Gulzar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh}
-.box{text-align:center;padding:20px}
-.logo{width:90px;height:90px;background:#fff;color:#000;display:flex;justify-content:center;align-items:center;font-size:40px;font-weight:bold;border-radius:20px;margin:0 auto 20px}
-h1{margin:10px 0}
-p{color:#aaa}
-.btn{background:#fff;color:#000;padding:12px 25px;border-radius:25px;border:none;font-weight:bold;font-size:16px;margin-top:20px;display:inline-block;text-decoration:none}
-.feed{max-width:400px;width:90%;margin-top:20px}
-.post{background:#111;border:1px solid #222;border-radius:12px;padding:15px;margin:10px 0;text-align:left}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',Arial}
+:root{--bg:#000;--card:#111;--border:#222;--muted:#888}
+body{background:#000;color:#fff;overflow:hidden;height:100vh}
+#splash{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
+.splash-logo{width:110px;height:110px;background:#fff;color:#000;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800;animation:pop 1.2s infinite alternate}
+.splash-name{margin-top:20px;font-size:22px;font-weight:800;letter-spacing:1px}
+.splash-sub{color:var(--muted);margin-top:6px;font-size:13px}
+.splash-pic{width:90px;height:90px;border-radius:50%;border:3px solid #fff;margin-top:20px;object-fit:cover;background:#222;display:flex;align-items:center;justify-content:center;font-size:36px}
+.progress{width:180px;height:3px;background:#222;border-radius:10px;margin-top:30px;overflow:hidden}
+.bar{height:100%;width:0%;background:#fff;animation:load 5s linear forwards}
+@keyframes pop{to{transform:scale(1.08)}}@keyframes load{to{width:100%}}
+#auth{position:fixed;inset:0;background:#000;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.auth-box{width:100%;max-width:380px}
+.auth-logo{width:70px;height:70px;background:#fff;color:#000;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;margin:0 auto 15px}
+.auth-title{font-size:28px;font-weight:800;text-align:center}
+.auth-desc{color:var(--muted);margin-top:6px;font-size:14px;text-align:center}
+.google-btn{width:100%;background:#fff;color:#000;border:none;padding:14px;border-radius:30px;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-top:20px}
+.divider{display:flex;align-items:center;gap:10px;margin:22px 0;color:var(--muted);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#222}
+.input{width:100%;background:#111;border:1px solid #222;border-radius:14px;padding:15px;margin-top:12px;color:#fff;font-size:15px;outline:none}
+.main-btn{width:100%;background:#fff;color:#000;border:none;padding:15px;border-radius:30px;font-weight:700;font-size:16px;margin-top:18px;cursor:pointer}
+.switch{margin-top:20px;text-align:center;color:var(--muted);font-size:14px}
+.switch b{color:#fff;cursor:pointer}
+#app{position:fixed;inset:0;display:none;flex-direction:column;background:#000}
+.topbar{height:52px;border-bottom:1px solid #111;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.top-logo{font-weight:800;font-size:18px}
+.content{flex:1;overflow-y:auto}
+.tab{display:none;padding-bottom:70px}.tab.active{display:block}
+.post-card{background:#000;border-bottom:1px solid #111;padding:0 0 12px}
+.post-head{display:flex;align-items:center;gap:10px;padding:12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.post-actions{display:flex;gap:16px;padding:12px 12px 6px;font-size:22px}
+.reels-wrap{height:calc(100vh - 112px);overflow-y:scroll;scroll-snap-type:y mandatory}
+.reel{height:100%;position:relative;scroll-snap-align:start;background:#111;display:flex;align-items:center;justify-content:center}
+.reel-overlay{position:absolute;bottom:0;left:0;right:50px;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.reel-actions{position:absolute;right:10px;bottom:20px;display:flex;flex-direction:column;gap:20px;align-items:center}
+.act{width:46px;height:46px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;backdrop-filter:blur(10px)}
+.upload-box{padding:20px;text-align:center}
+.upload-area{border:2px dashed #222;border-radius:18px;padding:40px 20px;margin-top:20px;cursor:pointer}
+.profile-header{padding:20px;text-align:center}
+.profile-avatar{width:90px;height:90px;border-radius:50%;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800;margin:0 auto;border:3px solid #222}
+.profile-name{font-size:20px;font-weight:800;margin-top:12px}
+.profile-handle{color:#888;font-size:13px;margin-top:2px}
+.stats{display:flex;justify-content:center;gap:30px;margin-top:18px}.stat b{display:block;font-size:18px}.stat{font-size:12px;color:#888;text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:10px}
+.grid-item{aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;font-size:20px;color:#555}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:60px;background:#000;border-top:1px solid #111;display:flex;justify-content:space-around;align-items:center;z-index:50}
+.nav-item{font-size:22px;color:#666;cursor:pointer;display:flex;flex-direction:column;align-items:center}.nav-item.active{color:#fff}.nav-item span{font-size:10px;margin-top:2px}
 </style>
 </head>
 <body>
-<div class="box">
-<div class="logo">MS</div>
-<h1>MIAN SOCIAL</h1>
-<p>Real Social Media - LIVE 🔥</p>
-<div class="feed">
-<div class="post">🔥 <b>Abdullah Mian</b><br> Meri app LIVE ho gayi! Welcome to Mian Social!</div>
-<div class="post">🎥 <b>Reels</b><br> TikTok style videos coming soon...</div>
-<div class="post">💬 <b>Chat</b><br> Real-time messaging enabled</div>
+<div id="splash">
+<div class="splash-logo">MS</div>
+<div class="splash-name">MIAN SOCIAL</div>
+<div class="splash-sub">By Mian Abdullah Gulzar</div>
+<div class="splash-pic">👑</div>
+<div class="progress"><div class="bar"></div></div>
+<div style="margin-top:12px;font-size:11px;color:#555" id="splashText">Loading...</div>
 </div>
-<a class="btn" href="#">Enter App</a>
-<p style="margin-top:30px;font-size:12px">mian47abdullah45-cyber.github.io/mian-social</p>
+<div id="auth">
+<div class="auth-box">
+<div class="auth-logo">MS</div>
+<div class="auth-title" id="authTitle">Welcome Back</div>
+<div class="auth-desc">Real Social Media - LIVE 🔥</div>
+<button class="google-btn" onclick="googleLogin()"><span style="font-size:18px">G</span> Continue with Google</button>
+<div class="divider">OR</div>
+<input id="email" class="input" placeholder="Email or username">
+<input id="pass" class="input" type="password" placeholder="Password">
+<button class="main-btn" onclick="doLogin()">Log In</button>
+<div class="switch"><span id="switchText">Don't have an account?</span> <b onclick="toggleAuth()" id="switchBtn">Sign up</b></div>
 </div>
-</body>
-</html>
+</div>
+<div id="app">
+<div class="topbar"><div class="top-logo">MIAN SOCIAL</div><div style="display:flex;gap:16px;font-size:20px"><span>🔍</span><span>✉️</span><span onclick="logout()">⚙️</span></div></div>
+<div class="content">
+<div id="tab-home" class="tab active"><div id="feed"></div></div>
+<div id="tab-reels" class="tab"><div class="reels-wrap" id="reelsWrap"></div></div>
+<div id="tab-upload" class="tab"><div class="upload-box"><h2>Create New</h2><p style="color:#888;margin-top:6px;font-size:14px">Upload video directly - No error</p><div class="upload-area" onclick="document.getElementById('fileInput').click()"><div style="font-size:40px">📤</div><div style="margin-top:10px;font-weight:600">Tap to upload Video / Photo</div><input type="file" id="fileInput" hidden accept="video/*,image/*" onchange="handleUpload(this)"></div><div id="uploadPreview"></div></div></div>
+<div id="tab-profile" class="tab"><div class="profile-header"><div class="profile-avatar" id="pAvatar">M</div><div class="profile-name" id="pName">Mian Abdullah Gulzar</div><div class="profile-handle" id="pHandle">@mianabdullah · Creator</div><div class="stats"><div class="stat"><b id="postCount">3</b>Posts</div><div class="stat"><b>1.2K</b>Followers</div><div class="stat"><b>180</b>Following</div></div></div><div class="grid" id="profileGrid"></div></div>
+</div>
+<div class="bottom">
+<div class="nav-item active" onclick="switchTab('home',this)">🏠<span>Home</span></div>
+<div class="nav-item" onclick="switchTab('reels',this)">🎬<span>Reels</span></div>
+<div class="nav-item" onclick="switchTab('upload',this)"><div style="background:#fff;color:#000;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center">+</div><span>Post</span></div>
+<div class="nav-item" onclick="alert('Chat coming soon!')">💬<span>Chat</span></div>
+<div class="nav-item" onclick="switchTab('profile',this)">👤<span>Profile</span></div>
+</div>
+</div>
+<script>
+let isLogin=true;
+let posts=JSON.parse(localStorage.getItem('ms_posts')||'null')||[{user:'Abdullah Mian',handle:'@mianabdullah',text:'Meri app LIVE ho gayi! Welcome to Mian Social! 🔥',likes:124,type:'text',emoji:'🔥'},{user:'Mian Social',handle:'@official',text:'TikTok style Reels are here! Scroll karo!',likes:89,type:'text',emoji:'🎥'},{user:'Abdullah Gulzar',handle:'@creator',text:'Direct video upload - No error, no problem!',likes:210,type:'text',emoji:'👑'}];
+let reels=JSON.parse(localStorage.getItem('ms_reels')||'null')||[{user:'@mianabdullah',caption:'First reel on Mian Social 🔥',likes:'1.2K'},{user:'@official',caption:'Welcome to real social media 💯',likes:'890'}];
+let currentUser=localStorage.getItem('ms_user')||null;
+function showAuth(){document.getElementById('splash').style.opacity='0';setTimeout(()=>{document.getElementById('splash').style.display='none';if(currentUser){showApp();}else{document.getElementById('auth').style.display='flex';}},600);}
+let pct=0;let splashInt=setInterval(()=>{pct+=2;document.getElementById('splashText').innerText=pct+'% Loading...';if(pct>=100)clearInterval(splashInt);},80);
+setTimeout(showAuth,5000);
+function toggleAuth(){isLogin=!isLogin;document.getElementById('authTitle').innerText=isLogin?'Welcome Back':'Create Account';document.getElementById('switchBtn').innerText=isLogin?'Sign up':'Log in';document.querySelector('.main-btn').innerText=isLogin?'Log In':'Sign Up';}
+function googleLogin(){localStorage.setItem('ms_user','Mian Abdullah Gulzar');currentUser='Mian Abdullah Gulzar';showApp();}
+function doLogin(){let e=document.getElementById('email').value;let p=document.getElementById('pass').value;if(!e||!p){alert('Email aur Password likho!');return}localStorage.setItem('ms_user',e.split('@')[0]);currentUser=e;showApp();}
+function showApp(){document.getElementById('auth').style.display='none';document.getElement
