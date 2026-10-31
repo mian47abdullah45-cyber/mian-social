@@ -6,71 +6,68 @@
 <title>WORLD TAP - MADE MIAN</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#fff;font-family:system-ui,Arial;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-/* NEW COLOR THEME - ROYAL GOLD + CYAN */
-:root{--gold:#FFD700;--cyan:#00E5FF;--dark:#0a0a0a;--card:#151515}
-
-/* AUTH / SPLASH - LOGO BARA */
-#authPage{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 20%, #1a1a00, #000 70%);z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.logoBig{width:110px;height:110px;background:linear-gradient(135deg,var(--gold),#FFA500);border-radius:30px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;color:#000;box-shadow:0 0 40px rgba(255,215,0,0.5);margin-bottom:18px}
-.madeMian{font-size:10px;letter-spacing:5px;color:var(--gold);font-weight:800;margin-top:8px}
-.abdullahName{font-size:22px;font-weight:900;margin-top:4px;background:linear-gradient(90deg,var(--gold),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.swatTag{font-size:9px;color:#666;letter-spacing:2px;margin-top:6px}
-
-.top{height:58px;background:linear-gradient(90deg,#0a0a0a,#151515);border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0}
+body{background:#000;color:#fff;font-family:system-ui,Arial;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+:root{--gold:#FFD700;--cyan:#00E5FF}
+#authPage{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;
+background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
+background-size:cover;background-position:center;}
+.logoBig{width:115px;height:115px;background:linear-gradient(135deg,var(--gold),#FFA500);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:58px;font-weight:900;color:#000;box-shadow:0 0 60px rgba(255,215,0,0.7);margin-bottom:20px}
+.madeMian{font-size:11px;letter-spacing:5px;color:var(--gold);font-weight:900;margin-top:10px}
+.abdullahName{font-size:26px;font-weight:900;margin-top:6px;background:linear-gradient(90deg,var(--gold),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.loginBtn{margin-top:35px;width:100%;max-width:340px;background:#fff;color:#000;padding:20px 10px;border-radius:35px;border:none;font-weight:900;font-size:17px;cursor:pointer;pointer-events:auto;box-shadow:0 0 40px rgba(255,255,255,0.3);position:relative;z-index:10}
+.loginBtn:active{transform:scale(0.96)}
+.top{height:58px;background:#0a0a0a;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0}
 .top b{background:linear-gradient(90deg,var(--gold),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:18px}
 .main{flex:1;overflow:hidden;position:relative}
-.page{position:absolute;top:0;left:0;right:0;bottom:0;display:none;overflow:auto;background:var(--dark)}
+.page{position:absolute;inset:0;display:none;overflow:auto;background:#000}
 .page.active{display:flex;flex-direction:column}
 #mapBox{flex:1;background:radial-gradient(circle at 50% 40%, #1a1a00 0%, #000 75%);position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.dot{position:absolute;width:22px;height:22px;background:var(--gold);border-radius:50%;border:4px solid #000;box-shadow:0 0 20px var(--gold),0 0 40px var(--gold);animation:glow 2s infinite}
-@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.bottom{height:76px;background:#111!important;border-top:2px solid #222!important;display:flex!important;flex-shrink:0;z-index:9999}
-.b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#777;cursor:pointer}
+.dot{position:absolute;width:22px;height:22px;background:var(--gold);border-radius:50%;border:4px solid #000;box-shadow:0 0 20px var(--gold)}
+.bottom{height:76px;background:#111!important;border-top:2px solid #222!important;display:flex!important;flex-shrink:0}
+.b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#777}
 .b.active{color:var(--gold);background:#1a1a00}
 .b span:first-child{font-size:24px}
 .b span:last-child{font-size:9px;font-weight:900;margin-top:4px}
 .b-up{flex:1;display:flex;align-items:center;justify-content:center}
-.b-up div{background:linear-gradient(135deg,var(--gold),var(--cyan));color:#000;width:54px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;box-shadow:0 0 20px rgba(255,215,0,0.4)}
-.box{background:var(--card);margin:10px;padding:14px;border-radius:16px;border:1px solid #222}
-.inpNew{width:100%;background:#111;border:1px solid #333;padding:16px 20px;border-radius:30px;color:#fff;margin-top:10px;font-size:14px;outline:none}
-.inpNew:focus{border-color:var(--gold);box-shadow:0 0 15px rgba(255,215,0,0.2)}
-.shortCard{position:relative;width:100%;height:100%;background:#000;scroll-snap-align:start}
-.shortActions{position:absolute;right:10px;bottom:110px;display:flex;flex-direction:column;gap:18px;z-index:20}
-.actBtn{width:48px;height:48px;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
-.actBtn:active{transform:scale(0.9)}
-.actBtn span:first-child{font-size:22px}
-.actBtn span:last-child{font-size:9px;font-weight:700;margin-top:2px;color:#fff}
-.typingBar{position:fixed;bottom:76px;left:0;right:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);border-top:1px solid #222;padding:10px 12px;display:flex;gap:10px;z-index:50}
-.typingBar input{flex:1;background:#1a1a1a;border:1px solid #333;border-radius:25px;padding:12px 18px;color:#fff;font-size:14px;outline:none}
+.b-up div{background:linear-gradient(135deg,var(--gold),var(--cyan));color:#000;width:54px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900}
+.box{background:#151515;margin:10px;padding:14px;border-radius:16px;border:1px solid #222}
+.inpNew{width:100%;background:#111;border:1px solid #333;padding:16px 20px;border-radius:30px;color:#fff;margin-top:10px;outline:none}
+.inpNew:focus{border-color:var(--gold)}
+.shortCard{position:relative;width:100%;height:100%;background:#000}
+.shortActions{position:absolute;right:10px;bottom:110px;display:flex;flex-direction:column;gap:18px}
+.actBtn{width:48px;height:48px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.typingBar{position:fixed;bottom:76px;left:0;right:0;background:rgba(10,10,10,0.95);border-top:1px solid #222;padding:10px 12px;display:flex;gap:10px}
+.typingBar input{flex:1;background:#1a1a1a;border:1px solid #333;border-radius:25px;padding:12px 18px;color:#fff}
 .typingBar button{background:linear-gradient(135deg,var(--gold),#FFA500);color:#000;border:none;padding:12px 20px;border-radius:25px;font-weight:800}
 </style>
 </head>
 <body>
-
-<!-- SPLASH + SIGN UP - LOGO BARA + MADE MIAN -->
 <div id="authPage">
 <div class="logoBig">W</div>
-<div style="font-size:28px;font-weight:900;letter-spacing:2px">WORLD TAP</div>
+<div style="font-size:30px;font-weight:900;letter-spacing:2px;color:#fff">WORLD TAP</div>
 <div class="madeMian">MADE • MIAN • SWAT</div>
 <div class="abdullahName">Abdullah Gulzar</div>
-<div class="swatTag">SODE PEDE MAIN ABDULLAH GULZAR • SWAT 🏔️🌍 • PURI DUNYA</div>
-<div style="margin-top:30px;width:100%;max-width:320px">
-<button onclick="googleLogin()" style="width:100%;background:#fff;color:#000;padding:18px;border-radius:30px;border:none;font-weight:900;font-size:16px;box-shadow:0 0 30px rgba(255,255,255,0.2)">🔵 Direct Google Se Login - 1 Click</button>
-<div style="font-size:10px;color:#555;margin-top:12px">ASAL GOOGLE LOGIN • NO PASSWORD • SECURE</div>
-<div style="margin-top:20px;background:#111;border:1px solid #222;border-radius:16px;padding:14px;text-align:left"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:1px">APP FEATURES READY:</div><div style="font-size:12px;color:#888;margin-top:6px;line-height:18px">✅ Puri Dunya Map 🌍 195 Countries<br>✅ Video Upload - No Error<br>✅ Like, Comment, Share, Save<br>✅ Settings - ID Change<br>✅ Royal Gold Color Theme</div></div>
-</div>
+<button class="loginBtn" onclick="googleLogin()">🔵 Direct Google Se Login - 1 Click</button>
+<div style="font-size:9px;color:#777;margin-top:10px;letter-spacing:1px">ASAL GOOGLE LOGIN • SECURE • MADE MIAN</div>
 </div>
 
-<div class="top"><div><b>WORLD TAP</b><div style="font-size:8px;color:#888;letter-spacing:1px">MADE MIAN • Abdullah Gulzar • SWAT 🏔️🌍</div></div><div style="background:linear-gradient(135deg,var(--gold),#FFA500);color:#000;padding:6px 14px;border-radius:20px;font-size:10px;font-weight:900">● LIVE • PURI DUNYA</div></div>
+<div class="top"><div><b>WORLD TAP</b><div style="font-size:8px;color:#888">MADE MIAN • Abdullah Gulzar 🏔️🌍</div></div><div style="background:var(--gold);color:#000;padding:6px 12px;border-radius:20px;font-size:10px;font-weight:900">● LIVE</div></div>
 
 <div class="main">
-<div id="page-map" class="page active"><div id="mapBox"><div style="text-align:center"><div style="font-size:70px">🌍</div><div style="letter-spacing:4px;font-size:13px;margin-top:12px;font-weight:800;color:var(--gold)">PURI DUNYA KA MAP</div><div style="font-size:10px;color:#666;margin-top:6px;letter-spacing:1px">KAHIN BHI TAP KARO • 195 COUNTRIES • MADE MIAN</div></div>
-<div class="dot" style="left:68%;top:22%" onclick="alert('🇵🇰 Pakistan - Swat, Sode Pede! 🏔️ MADE MIAN')"></div><div class="dot" style="left:22%;top:30%" onclick="alert('🇺🇸 USA - New York!')"></div><div class="dot" style="left:48%;top:16%" onclick="alert('🇬🇧 UK - London!')"></div><div class="dot" style="left:75%;top:46%" onclick="alert('🇮🇳 India - Delhi!')"></div><div class="dot" style="left:26%;top:74%" onclick="alert('🇧🇷 Brazil!')"></div><div class="dot" style="left:62%;top:80%" onclick="alert('🇦🇺 Australia!')"></div>
+<div id="page-map" class="page active"><div id="mapBox"><div style="text-align:center"><div style="font-size:70px">🌍</div><div style="letter-spacing:4px;font-size:13px;margin-top:12px;font-weight:800;color:var(--gold)">PURI DUNYA KA MAP</div></div>
+<div class="dot" style="left:68%;top:22%" onclick="alert('🇵🇰 Swat! Sode Pede!')"></div><div class="dot" style="left:22%;top:30%" onclick="alert('🇺🇸 USA!')"></div><div class="dot" style="left:48%;top:16%" onclick="alert('🇬🇧 UK!')"></div>
 </div></div>
+<div id="page-shorts" class="page"><div id="shortsBox" style="width:100%;height:100%;overflow-y:scroll"></div></div>
+<div id="page-upload" class="page"><div style="padding:20px;width:100%"><h2 style="color:var(--gold)">Upload Video 🎥</h2><div class="box" onclick="document.getElementById('file').click()" style="height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:2px dashed var(--gold)"><div style="font-size:42px">📤</div><div style="margin-top:10px;color:var(--gold)">Tap karo video select karo</div><input type="file" id="file" accept="video/*" style="display:none" onchange="previewVideo(event)"></div><video id="prev" style="width:100%;height:240px;display:none;background:#111;border-radius:16px;margin-top:12px" controls></video><input class="inpNew" id="desc" placeholder="✍️ Description - Sode Pede!"><input class="inpNew" id="place" placeholder="📍 Location" value="Swat, Pakistan"><button onclick="doUpload()" style="width:100%;background:linear-gradient(135deg,var(--gold),#FFA500);color:#000;padding:18px;border-radius:30px;border:none;font-weight:900;margin-top:16px;font-size:16px">✅ Upload - Puri Dunya Dekhegi 🌍</button><div id="stat" style="text-align:center;margin-top:12px;color:#0f0;display:none"></div></div></div>
+<div id="page-messages" class="page"><div style="width:100%;padding-bottom:80px"><div style="padding:16px"><h2>Messages 💬</h2></div><div class="box">🇵🇰 <b>Swat Chat</b><div style="font-size:13px;color:#888;margin-top:4px">Ali: Sode pede kon hai? 🏔️</div></div></div><div class="typingBar"><input id="chatInp" placeholder="✍️ Type message - Sode Pede!"><button onclick="sendChat()">Send 🚀</button></div></div>
+<div id="page-profile" class="page"><div style="padding:28px;width:100%;text-align:center"><div style="width:90px;height:90px;background:linear-gradient(135deg,var(--gold),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;color:#000;margin:0 auto">A</div><h2 id="uname" style="margin-top:14px">Guest User</h2><p id="uid" style="color:var(--gold);font-size:12px;margin-top:4px">ID: @guest • MADE MIAN</p><div style="display:flex;gap:10px;margin-top:20px"><div class="box" style="flex:1;text-align:center"><b id="vc" style="color:var(--gold)">0</b><div style="font-size:10px;color:#666">VIDEOS</div></div><div class="box" style="flex:1;text-align:center"><b style="color:var(--cyan)">🌍 World</b><div style="font-size:10px;color:#666">RANGE</div></div></div><button onclick="show('settings')" style="background:#111;color:var(--gold);padding:14px;border-radius:12px;border:1px solid #333;width:100%;margin-top:12px;text-align:left">⚙️ Settings & Privacy →</button><button onclick="logout()" style="background:#111;color:#666;padding:12px;border-radius:12px;border:1px solid #222;width:100%;margin-top:10px">Logout</button></div></div>
+<div id="page-settings" class="page"><div style="width:100%"><div style="padding:14px;border-bottom:1px solid #222;display:flex;gap:12px;align-items:center"><span onclick="show('profile')" style="font-size:26px;color:var(--gold)">←</span><h2>Settings ⚙️</h2></div><div class="box" onclick="editName()"><b>Edit Profile Name</b><div style="font-size:12px;color:#888" id="sname">Name: Guest</div></div><div class="box" onclick="editID()"><b>Change User ID</b><div style="font-size:12px;color:#888" id="sid">ID: @guest</div></div><div class="box"><b>About - MADE MIAN</b><div style="font-size:11px;color:#888">World Tap v3.0 • Abdullah Gulzar • Swat 🇵🇰</div></div></div></div>
+</div>
 
-<div id="page-shorts" class="page"><div id="shortsBox" style="width:100%;height:100%;overflow-y:scroll;scroll-snap-type:y mandatory"></div></div>
+<div class="bottom"><div class="b active" id="b-map" onclick="show('map')"><span>🗺️</span><span>MAP</span></div><div class="b" id="b-shorts" onclick="show('shorts')"><span>▶️</span><span>SHORTS</span></div><div class="b-up" onclick="show('upload')"><div>+</div></div><div class="b" id="b-messages" onclick="show('messages')"><span>💬</span><span>CHAT</span></div><div class="b" id="b-profile" onclick="show('profile')"><span>👤</span><span>PROFILE</span></div></div>
 
-<div id="page-upload" class="page"><div style="padding:20px;width:100%"><h2 style="color:var(--gold)">Upload Video 🎥</h2><div class="box" onclick="document.getElementById('file').click()" style="height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:2px dashed var(--gold);background:rgba(255,215,0,0.05)"><div style="font-size:42px">📤</div><div style="margin-top:10px;color:var(--gold);font-weight:700">Tap karo video select karo</div><div style="font-size:10px;color:#666;margin-top:4px">MP4, MOV - Max 100MB - No Error - MADE MIAN</div><input type="file" id="file" accept="video/*" style="display:none" onchange="previewVideo(event)"></div><video id="prev" style="width:100%;height:240px;display:none;background:#111;border-radius:16px;margin-top:12px" controls></video><input class="inpNew" id="desc" placeholder="✍️ Description likho - Sode Pede! 🏔️❤️"><input class="inpNew" id="place" placeholder="📍 Location" value="Swat, Pakistan"><button onclick="doUpload()" style="width:100%;background:linear-gradient(135deg,var(--gold),#FFA500);color:#000;padding:18px;border-radius:30px;border:none;font-weight:900;margin-top:16px;font-size:16px">✅ Upload - Puri Dunya Dekhegi 🌍</button><div id="stat" style="text-align:center;margin-top:12px;color:#0f0;display:none"></div></div></div>
-
-<div id="page-messages" class="page"><div style="width:100%;padding-bottom:80px"><div style="padding:16px"><h2>Messages 💬</h2><p style="font-size:11px;color:#666">Puri dunya se chat - New typing design</p></div><div class="box">🇵🇰 <b>Swat Chat</b><div style="font-size:13px;color:#888;margin-top:4px">Ali: Sode pede kon hai? 🏔️ MADE MIAN!</div></div><div class="box">🇺🇸 <b>USA Chat</b><div style="font-size:13px;color:#888;margin-top:4px">John: World Tap is amazing! 🌍</div></div><div class="box">🌍 <b>World Chat</b><div style="font-size:13px;color:#888;margin-top:4px">Puri dunya yahan hai - Abdullah Gulzar!</div></div></div><div class="typingBar"><input id="chatInp" placeholder="✍️ Type message - Sode Pede! 🏔️"><button onclick="sendChat()">Send 
+<script>
+var videos=JSON.parse(localStorage.getItem('wt_v')||'[]');var selData=null;var likesData={};
+function show(p){document.querySelectorAll('.page').forEach(function(e){e.style.display='none';e.classList.remove('active');});var pg=document.getElementById('page-'+p);pg.style.display='flex';pg.classList.add('active');document.querySelectorAll('.b').forEach(function(e){e.classList.remove('active');});var btn=document.getElementById('b-'+p);if(btn)btn.classList.add('active');if(p=='shorts')loadShorts();if(p=='profile'||p=='settings')update();}
+function previewVideo(e){var f=e.target.files[0];if(!f)return;var url=URL.createObjectURL(f);var v=document.getElementById('prev');v.src=url;v.style.display='block';var r=new FileReader();r.onload=function(ev){selData=ev.target.result;};r.readAsDataURL(f);}
+function doUpload(){var d=document.getElementById('desc').value||'Sode Pede! Swat se! 🏔️ MADE MIAN';var pl=document.getElementById('place').value||'Swat, Pakistan';if(!selData){alert('Pehle video select karo! 📤');document.getElementById('file').click();return;}var st=document.getElementById('stat');st.style.display='block';st.innerText='✅ Uploading...';setTimeout(function(){videos.unshift({id:Date.now(),desc:d,place:pl,video:selData,user:localStorage.getItem('wt_n')||'Abdullah Gulzar'});localStorage.setItem('wt_v',JSON.stringify(videos));st.innerText='✅ Uploaded! 🌍';setTimeout(function(){show('shorts');
