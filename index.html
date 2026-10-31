@@ -4,97 +4,148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="google" content="notranslate">
-<title>WORLD TAP - Swat</title>
+<title>WORLD TAP - Swat - Puri Dunya</title>
 <style>
-*{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:system-ui,Arial;height:100vh;width:100vw;overflow:hidden;touch-action:manipulation}
-.top{position:fixed;top:0;left:0;right:0;z-index:9999;background:#000;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222;height:56px}
-.logo{font-weight:900;font-size:17px;letter-spacing:0.5px}.logo span{font-size:8px;color:#888;display:block;font-weight:400;margin-top:2px;letter-spacing:0.8px}
-#mapFrame{position:fixed;top:56px;left:0;right:0;bottom:72px;width:100%;height:calc(100vh - 128px);border:none;background:#111}
-.page{position:fixed;top:56px;left:0;right:0;bottom:72px;background:#000;z-index:10;display:none;overflow:auto}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+body{background:#000;color:#fff;font-family:system-ui,Arial;height:100vh;overflow:hidden}
+.top{position:fixed;top:0;left:0;right:0;z-index:1000;background:#000;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #222}
+.logo{font-weight:900;font-size:17px}.logo span{font-size:8px;color:#888;display:block;font-weight:400;letter-spacing:1px}
+.main{position:fixed;top:56px;left:0;right:0;bottom:70px;overflow:hidden}
+.page{position:absolute;top:0;left:0;right:0;bottom:0;background:#000;display:none;overflow:auto}
 .page.active{display:block}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:rgba(0,0,0,0.98);backdrop-filter:blur(20px);border-top:1px solid #1a1a1a;display:flex;height:72px;padding:0 10px;align-items:center}
-.b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#555;cursor:pointer;padding:6px;border-radius:12px;transition:0.2s}
-.b.active{color:#fff;background:rgba(255,255,255,0.08)}
-.b .icon{font-size:24px;line-height:1;margin-bottom:3px}
-.b .txt{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
-.b.active .txt{color:#fff}
-.b.active .icon{transform:scale(1.1)}
-.short{height:100%;position:relative;background:#000;scroll-snap-align:start}
-.short img{width:100%;height:100%;object-fit:cover}
-.short-ui{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:20px 15px 15px 15px}
-.badge{position:fixed;bottom:82px;left:12px;z-index:50;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:#fff;padding:6px 12px;border-radius:20px;font-size:10px;border:1px solid rgba(255,255,255,0.1)}
+#page-map.active{display:flex;flex-direction:column}
+.map-area{flex:1;background:#0a0a0a;position:relative;overflow:hidden}
+.world-map{width:100%;height:100%;background:radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 70%);position:relative;display:flex;align-items:center;justify-content:center}
+.tap-dot{position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;border:3px solid #000;box-shadow:0 0 15px #fff;animation:pulse 2s infinite;cursor:pointer}
+@keyframes pulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,0.7)}70%{transform:scale(1.2);box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.card{position:absolute;bottom:15px;left:10px;right:10px;background:#111;border:1px solid #333;border-radius:18px;padding:12px;z-index:50;display:none}
+.card.show{display:block}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:70px;background:#000;border-top:1px solid #222;display:flex;z-index:9999}
+.btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#555}
+.btn.active{color:#fff;background:rgba(255,255,255,0.06)}
+.btn .ic{font-size:22px}.btn .tx{font-size:9px;font-weight:700;margin-top:3px;letter-spacing:0.5px}
+.short-item{height:100%;position:relative;scroll-snap-align:start;background:#000}
+.short-item img{width:100%;height:100%;object-fit:cover}
+.short-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:25px 15px 15px 15px}
+.country-pill{background:#fff;color:#000;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;display:inline-block}
 </style>
 </head>
 <body>
 <div class="top">
-<div class="logo">WORLD TAP<span>SODE PEDE MAIN ABDULLAH GULZAR • SWAT 🏔️</span></div>
-<div style="background:#fff;color:#000;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:900">● LIVE</div>
+<div class="logo">WORLD TAP<span>SODE PEDE MAIN ABDULLAH GULZAR • SWAT 🏔️ • PURI DUNYA 🌍</span></div>
+<div style="background:#fff;color:#000;padding:5px 10px;border-radius:15px;font-size:10px;font-weight:900">● 2,104 LIVE</div>
 </div>
 
-<!-- MAP -->
-<iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105578.2!2d72.236!3d34.8065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dc20543d7c5e73%3A0x6b9d9a0c3c8b8d7a!2sSwat!5e0!3m2!1sen!2s!4v1700000000000" loading="lazy"></iframe>
+<div class="main">
+<!-- 1. MAP - PURI DUNYA WALA -->
+<div id="page-map" class="page active">
+<div class="map-area" onclick="tapWorld(event)">
+<div class="world-map">
+<div style="text-align:center;opacity:0.3">
+<div style="font-size:80px">🌍</div>
+<div style="font-size:12px;margin-top:10px;letter-spacing:3px">PURI DUNYA KA MAP</div>
+<div style="font-size:10px;color:#555;margin-top:5px">KAHIN BHI TAP KARO • ANYWHERE TAP</div>
+</div>
+<!-- COUNTRY DOTS - PURI DUNYA -->
+<div class="tap-dot" style="left:68%;top:35%" onclick="showTap('Pakistan','🇵🇰','Swat, Pakistan','https://picsum.photos/500/800?random=1');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:20%;top:32%" onclick="showTap('USA','🇺🇸','New York, USA','https://picsum.photos/500/800?random=2');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:47%;top:28%" onclick="showTap('UK','🇬🇧','London, UK','https://picsum.photos/500/800?random=3');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:70%;top:42%" onclick="showTap('India','🇮🇳','Delhi, India','https://picsum.photos/500/800?random=4');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:78%;top:38%" onclick="showTap('China','🇨🇳','Beijing, China','https://picsum.photos/500/800?random=5');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:48%;top:45%" onclick="showTap('Egypt','🇪🇬','Cairo, Egypt','https://picsum.photos/500/800?random=6');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:60%;top:70%" onclick="showTap('Australia','🇦🇺','Sydney, Australia','https://picsum.photos/500/800?random=7');event.stopPropagation()"></div>
+<div class="tap-dot" style="left:25%;top:55%" onclick="showTap('Brazil','🇧🇷','Brazil','https://picsum.photos/500/800?random=8');event.stopPropagation()"></div>
+</div>
+<div class="card" id="tapCard">
+<span id="cFlag" style="background:#fff;color:#000;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">🇵🇰 PAKISTAN</span>
+<img id="cImg" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-top:10px" src="">
+<div style="display:flex;justify-content:space-between;margin-top:10px;align-items:center">
+<b id="cPlace">Swat, Pakistan</b><span style="font-size:11px;color:#888">Just now</span>
+</div>
+<button onclick="document.getElementById('tapCard').classList.remove('show')" style="width:100%;margin-top:12px;padding:12px;border-radius:25px;border:none;background:#fff;color:#000;font-weight:800">CLOSE • CHAT KARO 💬</button>
+</div>
+</div>
+<div style="background:#111;padding:10px 15px;display:flex;gap:8px;overflow:auto;border-top:1px solid #222">
+<span style="background:#222;padding:6px 12px;border-radius:20px;font-size:11px;white-space:nowrap">🌍 Puri Dunya</span>
+<span style="background:#222;padding:6px 12px;border-radius:20px;font-size:11px;white-space:nowrap">🇵🇰 Pakistan</span>
+<span style="background:#222;padding:6px 12px;border-radius:20px;font-size:11px;white-space:nowrap">🇺🇸 USA</span>
+<span style="background:#222;padding:6px 12px;border-radius:20px;font-size:11px;white-space:nowrap">🇬🇧 UK</span>
+<span style="background:#222;padding:6px 12px;border-radius:20px;font-size:11px;white-space:nowrap">🇮🇳 India</span>
+</div>
+</div>
 
-<!-- SHORTS -->
+<!-- 2. SHORTS -->
 <div id="page-shorts" class="page">
 <div style="height:100%;overflow-y:scroll;scroll-snap-type:y mandatory" id="shortsBox"></div>
 </div>
 
-<!-- MESSAGES -->
-<div id="page-messages" class="page" style="padding:15px">
-<h2 style="font-size:20px;margin-bottom:15px">Messages 💬</h2>
-<div style="background:#111;border-radius:15px;overflow:hidden">
-<div style="padding:16px;display:flex;gap:12px;border-bottom:1px solid #1a1a1a"><img src="https://picsum.photos/100/100?random=10" style="width:48px;height:48px;border-radius:50%"><div><div style="font-weight:700">Swat Chat 🇵🇰 <span style="font-size:10px;background:#0f0;color:#000;padding:2px 6px;border-radius:10px;margin-left:5px">NEW</span></div><div style="font-size:13px;color:#888;margin-top:2px">Ali: Sode pede, Swat se kon hai? 🏔️</div></div></div>
-<div style="padding:16px;display:flex;gap:12px;border-bottom:1px solid #1a1a1a"><img src="https://picsum.photos/100/100?random=11" style="width:48px;height:48px;border-radius:50%"><div><div style="font-weight:700">USA Chat 🇺🇸</div><div style="font-size:13px;color:#888;margin-top:2px">John: Hello from NY!</div></div></div>
-<div style="padding:16px;display:flex;gap:12px"><img src="https://picsum.photos/100/100?random=12" style="width:48px;height:48px;border-radius:50%"><div><div style="font-weight:700">UK Chat 🇬🇧</div><div style="font-size:13px;color:#888;margin-top:2px">Emma: Hi from London!</div></div></div>
-</div>
+<!-- 3. MESSAGES -->
+<div id="page-messages" class="page" style="padding:0">
+<div style="padding:15px;border-bottom:1px solid #111"><h2>Messages 💬</h2><p style="font-size:11px;color:#666;margin-top:4px">Puri dunya se chat - World Chat</p></div>
+<div style="padding:15px;display:flex;gap:12px;border-bottom:1px solid #111"><img src="https://picsum.photos/100/100?random=10" style="width:50px;height:50px;border-radius:50%"><div style="flex:1"><div style="display:flex;justify-content:space-between"><b>Swat Chat 🇵🇰</b><span style="font-size:10px;color:#666">2m</span></div><div style="font-size:13px;color:#888;margin-top:3px">Ali: Sode pede, Swat se kon hai? 🏔️</div><div style="background:#fff;color:#000;display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;margin-top:5px;font-weight:700">99+ messages</div></div></div>
+<div style="padding:15px;display:flex;gap:12px;border-bottom:1px solid #111"><img src="https://picsum.photos/100/100?random=11" style="width:50px;height:50px;border-radius:50%"><div><b>USA Chat 🇺🇸</b><div style="font-size:13px;color:#888;margin-top:3px">John: Hello from New York!</div></div></div>
+<div style="padding:15px;display:flex;gap:12px;border-bottom:1px solid #111"><img src="https://picsum.photos/100/100?random=12" style="width:50px;height:50px;border-radius:50%"><div><b>World Chat 🌍</b><div style="font-size:13px;color:#888;margin-top:3px">Puri dunya yahan hai!</div></div></div>
 </div>
 
-<!-- PROFILE -->
+<!-- 4. PROFILE -->
 <div id="page-profile" class="page">
 <div style="text-align:center;padding:35px 20px">
-<img src="https://picsum.photos/200/200?random=99" style="width:96px;height:96px;border-radius:50%;border:3px solid #fff;object-fit:cover">
-<h2 style="margin-top:16px;font-size:22px">Abdullah Gulzar</h2>
-<p style="color:#888;font-size:13px;margin-top:4px">@abdullah.swat • Swat Valley 🏔️</p>
-<p style="margin-top:8px;font-size:12px;color:#aaa">Sode Pede Main Abdullah Gulzar ❤️</p>
-<button onclick="handleGoogle()" style="background:#fff;color:#000;padding:16px 20px;border-radius:30px;border:none;font-weight:800;width:100%;margin-top:28px;font-size:15px;letter-spacing:0.2px">🔵 Continue with Google</button>
-<p style="font-size:10px;color:#555;margin-top:10px">DIRECT GOOGLE LOGIN • NO PASSWORD NEEDED</p>
-<div style="display:flex;justify-content:space-around;background:#111;border-radius:15px;padding:18px;margin-top:22px"><div style="text-align:center"><div style="font-size:18px;font-weight:800">127</div><div style="font-size:10px;color:#666;margin-top:2px">TAPS</div></div><div style="text-align:center"><div style="font-size:18px;font-weight:800">Swat</div><div style="font-size:10px;color:#666;margin-top:2px">CITY</div></div><div style="text-align:center"><div style="font-size:18px;font-weight:800">1.2K</div><div style="font-size:10px;color:#666;margin-top:2px">LIKES</div></div></div>
+<img src="https://picsum.photos/200/200?random=99" style="width:96px;height:96px;border-radius:50%;border:3px solid #fff">
+<h2 style="margin-top:16px">Abdullah Gulzar</h2>
+<p style="color:#888;font-size:13px;margin-top:4px">Swat Valley 🏔️ • Puri Dunya ka App</p>
+<button onclick="alert('✅ Google Login Successful! Welcome Abdullah! Sode Pede! 🏔️🌍')" style="background:#fff;color:#000;padding:16px;border-radius:30px;border:none;font-weight:800;width:100%;margin-top:28px">🔵 Continue with Google - Direct Login</button>
+<div style="display:flex;justify-content:space-around;background:#111;border-radius:15px;padding:18px;margin-top:20px"><div><div style="font-size:18px;font-weight:800">127</div><div style="font-size:10px;color:#666">TAPS</div></div><div><div style="font-size:18px;font-weight:800">🌍 World</div><div style="font-size:10px;color:#666">RANGE</div></div><div><div style="font-size:18px;font-weight:800">1.2K</div><div style="font-size:10px;color:#666">LIKES</div></div></div>
 </div>
 </div>
-
-<div class="badge">🏔️ Swat - Abdullah Gulzar</div>
+</div>
 
 <div class="bottom">
-<div class="b active" id="b-map" onclick="showPage('map')"><div class="icon">🗺️</div><div class="txt">Map</div></div>
-<div class="b" id="b-shorts" onclick="showPage('shorts')"><div class="icon">▶️</div><div class="txt">Shorts</div></div>
-<div class="b" id="b-messages" onclick="showPage('messages')"><div class="icon">💬</div><div class="txt">Messages</div></div>
-<div class="b" id="b-profile" onclick="showPage('profile')"><div class="icon">👤</div><div class="txt">Profile</div></div>
+<div class="btn active" id="btn-map" onclick="openP('map')"><div class="ic">🗺️</div><div class="tx">Map</div></div>
+<div class="btn" id="btn-shorts" onclick="openP('shorts')"><div class="ic">▶️</div><div class="tx">Shorts</div></div>
+<div class="btn" id="btn-messages" onclick="openP('messages')"><div class="ic">💬</div><div class="tx">Messages</div></div>
+<div class="btn" id="btn-profile" onclick="openP('profile')"><div class="ic">👤</div><div class="tx">Profile</div></div>
 </div>
 
 <script>
-function showPage(p){
-event.preventDefault();event.stopPropagation();
-document.querySelectorAll('.page').forEach(e=>{e.style.display='none';e.classList.remove('active');});
-document.querySelectorAll('.b').forEach(e=>e.classList.remove('active'));
-if(p==='map'){
-document.getElementById('mapFrame').style.display='block';
-}else{
-document.getElementById('mapFrame').style.display='none';
-var el=document.getElementById('page-'+p);
-el.style.display='block';el.classList.add('active');
+function openP(p){
+document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+document.querySelectorAll('.btn').forEach(el=>el.classList.remove('active'));
+document.getElementById('page-'+p).classList.add('active');
+document.getElementById('btn-'+p).classList.add('active');
+if(p==='shorts') loadShorts();
 }
-document.getElementById('b-'+p).classList.add('active');
-if(p==='shorts'){loadShorts();}
-return false;
+function showTap(country,flag,place,img){
+document.getElementById('cImg').src=img;
+document.getElementById('cPlace').innerText=place;
+document.getElementById('cFlag').innerText=flag+' '+country.toUpperCase();
+document.getElementById('tapCard').classList.add('show');
+}
+function tapWorld(e){
+var x = (e.clientX / window.innerWidth * 100).toFixed(0);
+var places = [
+{flag:'🇵🇰',country:'Pakistan',place:'Swat, Pakistan'},
+{flag:'🇺🇸',country:'USA',place:'USA'},
+{flag:'🌍',country:'World',place:'Puri Dunya - World'},
+{flag:'🇬🇧',country:'UK',place:'London'},
+{flag:'🇦🇪',country:'UAE',place:'Dubai'}
+];
+var r = places[Math.floor(Math.random()*places.length)];
+showTap(r.country,r.flag,r.place,'https://picsum.photos/500/800?random='+Math.floor(Math.random()*100));
 }
 function loadShorts(){
 var box=document.getElementById('shortsBox');
 if(box.children.length>0) return;
 var data=[
-{user:"Abdullah - Swat 🏔️",place:"Swat Valley",img:"https://picsum.photos/600/900?random=21",desc:"Sode Pede Main Abdullah Gulzar ❤️ Swat se World Tak!",likes:"1.2K"},
-{user:"Ali - Mingora 🇵🇰",place:"Mingora, Swat",img:"https://picsum.photos/600/900?random=22",desc:"Swat ki wadiya - Jannat hai! 🏔️❤️",likes:"890"},
-{user:"John - USA 🇺🇸",place:"New York",img:"https://picsum.photos/600/900?random=23",desc:"World Tap is amazing! Hello Swat!",likes:"2.1K"},
+{user:"Abdullah - Swat 🏔️",place:"Swat Valley",img:"https://picsum.photos/600/900?random=21",desc:"Sode Pede Main Abdullah Gulzar ❤️ Puri Dunya Tak! 🌍",likes:"1.2K",flag:"🇵🇰"},
+{user:"Ali - Mingora 🇵🇰",place:"Mingora",img:"https://picsum.photos/600/900?random=22",desc:"Swat ki wadiya - Jannat hai! 🏔️",likes:"890",flag:"🇵🇰"},
+{user:"John - USA 🇺🇸",place:"New York",img:"https://picsum.photos/600/900?random=23",desc:"World Tap - Puri Dunya Yahan! Amazing!",likes:"2.1K",flag:"🇺🇸"},
+{user:"Emma - UK 🇬🇧",place:"London",img:"https://picsum.photos/600/900?random=24",desc:"Hello from UK! Sode Pede! 😍",likes:"560",flag:"🇬🇧"},
 ];
 data.forEach(s=>{
-box.innerHTML+=`<div class="short"><img src="${s.img}">
+box.innerHTML+=`<div class="short-item"><img src="${s.img}"><div class="short-info"><span class="country-pill">${s.flag} ${s.place}</span><div style="font-weight:700;margin-top:8px">${s.user}</div><div style="font-size:13px;margin-top:4px">${s.desc}</div><div style="font-size:11px;color:#ccc;margin-top:6px">❤️ ${s.likes} • Puri Dunya 🌍</div></div></div>`;
+});
+}
+loadShorts();
+</script>
+</body>
+</html>
