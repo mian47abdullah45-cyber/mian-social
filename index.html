@@ -2,50 +2,110 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WORLD TAP - FINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial;height:100vh;overflow:hidden}
-.top{position:fixed;top:0;left:0;right:0;height:55px;background:#000;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 12px;z-index:100}
-.main{position:fixed;top:55px;left:0;right:0;bottom:70px;overflow:auto}
-.page{width:100%;height:100%;display:none}
-.page.active{display:block}
-#mapArea{width:100%;height:100%;background:#000;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.dot{position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;border:3px solid #000;box-shadow:0 0 15px #fff}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:70px;background:#111;border-top:2px solid #333;display:flex;z-index:9999}
-.b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#777}
-.b.active{color:#fff}
-.b span:first-child{font-size:22px}
-.b span:last-child{font-size:9px;font-weight:800;margin-top:3px}
-.b-up{flex:1;display:flex;align-items:center;justify-content:center}
-.b-up div{background:#fff;color:#000;width:50px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900}
+body{background:#000;color:#fff;font-family:Arial;display:flex;flex-direction:column;height:100vh;height:100dvh}
+.top{height:55px;background:#000;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 12px;flex-shrink:0}
+.main{flex:1;overflow:hidden;position:relative}
+.page{position:absolute;top:0;left:0;right:0;bottom:0;display:none;overflow:auto;background:#000}
+.page.active{display:flex;flex-direction:column}
+#mapBox{flex:1;background:#000;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.dot{position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;border:4px solid #000;box-shadow:0 0 20px #fff,0 0 40px #fff;animation:glow 2s infinite}
+@keyframes glow{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.bottom{height:75px;background:#1a1a1a!important;border-top:3px solid #fff!important;display:flex!important;flex-shrink:0;z-index:99999}
+.b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#999;cursor:pointer}
+.b.active{color:#fff;background:#222}
+.b span:first-child{font-size:24px}
+.b span:last-child{font-size:9px;font-weight:900;margin-top:4px}
+.b-up{flex:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.b-up div{background:#fff;color:#000;width:52px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;box-shadow:0 0 20px #fff}
 .box{background:#111;margin:10px;padding:12px;border-radius:12px;border:1px solid #222}
 .inp{width:100%;background:#111;border:1px solid #333;padding:14px;border-radius:10px;color:#fff;margin-top:10px}
 </style>
 </head>
 <body>
-<div class="top">
-<div><b>WORLD TAP</b><div style="font-size:8px;color:#888">SODE PEDE MAIN ABDULLAH GULZAR • SWAT 🏔️🌍</div></div>
-<div style="background:#fff;color:#000;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:900">● LIVE</div>
-</div>
+<div class="top"><div><b>WORLD TAP</b><div style="font-size:8px;color:#888">SODE PEDE MAIN ABDULLAH GULZAR • SWAT 🏔️🌍 PURI DUNYA</div></div><div style="background:#fff;color:#000;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:900">● LIVE</div></div>
 
 <div class="main">
-<div id="page-map" class="page active">
-<div id="mapArea">
-<div style="text-align:center;opacity:0.5"><div style="font-size:60px">🌍</div><div style="letter-spacing:3px;font-size:12px;margin-top:10px">PURI DUNYA KA MAP</div><div style="font-size:10px;color:#666;margin-top:5px">KAHIN BHI TAP KARO • 195 COUNTRIES</div></div>
-<div class="dot" style="left:68%;top:25%" onclick="alert('🇵🇰 Pakistan - Swat! 🏔️ Sode Pede!')"></div>
-<div class="dot" style="left:22%;top:30%" onclick="alert('🇺🇸 USA - New York!')"></div>
-<div class="dot" style="left:48%;top:22%" onclick="alert('🇬🇧 UK - London!')"></div>
-<div class="dot" style="left:75%;top:40%" onclick="alert('🇮🇳 India - Delhi!')"></div>
-<div class="dot" style="left:28%;top:55%" onclick="alert('🇧🇷 Brazil!')"></div>
-<div class="dot" style="left:60%;top:65%" onclick="alert('🇦🇺 Australia!')"></div>
-</div>
+<div id="page-map" class="page active"><div id="mapBox"><div style="text-align:center"><div style="font-size:70px">🌍</div><div style="letter-spacing:4px;font-size:12px;margin-top:12px;color:#fff">PURI DUNYA KA MAP</div><div style="font-size:10px;color:#888;margin-top:6px">KAHIN BHI TAP KARO • 195 COUNTRIES</div></div>
+<div class="dot" style="left:68%;top:20%" onclick="alert('🇵🇰 Pakistan - Swat, Sode Pede! 🏔️')"></div>
+<div class="dot" style="left:22%;top:28%" onclick="alert('🇺🇸 USA - New York!')"></div>
+<div class="dot" style="left:48%;top:15%" onclick="alert('🇬🇧 UK - London!')"></div>
+<div class="dot" style="left:75%;top:45%" onclick="alert('🇮🇳 India - Delhi!')"></div>
+<div class="dot" style="left:26%;top:75%" onclick="alert('🇧🇷 Brazil!')"></div>
+<div class="dot" style="left:62%;top:80%" onclick="alert('🇦🇺 Australia!')"></div>
+</div></div>
+
+<div id="page-shorts" class="page"><div id="shortsBox" style="padding:10px;width:100%"></div></div>
+<div id="page-upload" class="page"><div style="padding:20px;width:100%"><h2>Upload Video 🎥</h2><div class="box" onclick="document.getElementById('file').click()" style="height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:2px dashed #555"><div style="font-size:40px">📤</div><div style="margin-top:10px;color:#aaa">Tap karo video select karo</div><div style="font-size:10px;color:#666;margin-top:4px">MP4, MOV - Max 100MB - No Error</div><input type="file" id="file" accept="video/*" style="display:none" onchange="previewVideo(event)"></div><video id="prev" style="width:100%;height:240px;display:none;background:#111;border-radius:12px;margin-top:10px" controls></video><input class="inp" id="desc" placeholder="Description - Sode Pede! 🏔️❤️"><input class="inp" id="place" placeholder="Location" value="Swat, Pakistan"><button onclick="doUpload()" style="width:100%;background:#fff;color:#000;padding:16px;border-radius:30px;border:none;font-weight:900;margin-top:15px;font-size:15px">✅ Upload - Puri Dunya Dekhegi 🌍</button><div id="stat" style="text-align:center;margin-top:12px;color:#0f0;display:none"></div></div></div>
+<div id="page-messages" class="page"><div style="padding:15px;width:100%"><h2>Messages 💬</h2><p style="font-size:11px;color:#666">Puri dunya se chat</p></div><div class="box" style="width:calc(100% - 20px)">🇵🇰 <b>Swat Chat</b> - Ali: Sode pede kon hai? 🏔️</div><div class="box" style="width:calc(100% - 20px)">🇺🇸 <b>USA Chat</b> - John: Hello!</div><div class="box" style="width:calc(100% - 20px)">🌍 <b>World Chat</b> - Puri dunya yahan hai!</div></div>
+<div id="page-profile" class="page"><div style="padding:25px;width:100%;text-align:center"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style="width:85px;height:85px;border-radius:50%;border:3px solid #fff"><h2 id="uname" style="margin-top:14px">Guest User</h2><p id="uemail" style="color:#888;font-size:12px">Not logged in</p><p id="uid" style="color:#666;font-size:11px;margin-top:4px">ID: @guest</p><button onclick="googleLogin()" style="background:#fff;color:#000;padding:16px;border-radius:30px;border:none;font-weight:900;width:100%;margin-top:22px;font-size:15px">🔵 Direct Google Login - 1 Click</button><div style="display:flex;gap:10px;margin-top:18px;text-align:left"><div class="box" style="flex:1;text-align:center"><b id="vc">0</b><div style="font-size:10px;color:#666">VIDEOS</div></div><div class="box" style="flex:1;text-align:center"><b>🌍 World</b><div style="font-size:10px;color:#666">RANGE</div></div></div><button onclick="show('settings')" style="background:#111;color:#fff;padding:14px;border-radius:12px;border:1px solid #333;width:100%;margin-top:12px;text-align:left">⚙️ Settings & Privacy →</button></div></div>
+<div id="page-settings" class="page"><div style="width:100%"><div style="padding:14px;border-bottom:1px solid #222;display:flex;gap:12px;align-items:center"><span onclick="show('profile')" style="font-size:26px">←</span><h2>Settings ⚙️</h2></div><div class="box" onclick="editName()"><b>Edit Profile Name</b><div style="font-size:12px;color:#888" id="sname">Name: Guest</div></div><div class="box" onclick="editID()"><b>Change User ID</b><div style="font-size:12px;color:#888" id="sid">ID: @guest</div></div><div class="box"><b>🔔 Notifications</b> - ON</div><div class="box"><b>🌍 Language</b> - Urdu</div><div class="box"><b>🎥 Upload Quality</b> - HD - No Error</div><div class="box"><b>World Tap v2.0</b><div style="font-size:11px;color:#888">Sode Pede Main Abdullah Gulzar • Swat 🏔️</div></div><button onclick="logout()" style="background:#ff000022;color:#ff5555;border:1px solid #550000;padding:14px;border-radius:12px;width:calc(100% - 20px);margin:10px;font-weight:700">Logout</button></div></div>
 </div>
 
-<div id="page-shorts" class="page"><div id="shortsBox" style="padding:10px"></div></div>
+<div class="bottom">
+<div class="b active" id="b-map" onclick="show('map')"><span>🗺️</span><span>MAP</span></div>
+<div class="b" id="b-shorts" onclick="show('shorts')"><span>▶️</span><span>SHORTS</span></div>
+<div class="b-up" onclick="show('upload')"><div>+</div></div>
+<div class="b" id="b-messages" onclick="show('messages')"><span>💬</span><span>CHAT</span></div>
+<div class="b" id="b-profile" onclick="show('profile')"><span>👤</span><span>PROFILE</span></div>
+</div>
 
-<div id="page-upload" class="page"><div style="padding:20px">
-<h2>Upload Video 🎥</h2>
-<div class="box" onclick="document.getElementById('file').click()" style="height:250px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:2px dashed #444">
-<div style="font-size:40px">📤</div><div style="margin-top:10px;color:#888;font
+<script>
+var videos = JSON.parse(localStorage.getItem('wt_v')||'[]');
+var selData = null;
+function show(p){
+document.querySelectorAll('.page').forEach(function(e){e.style.display='none';e.classList.remove('active');});
+var pg=document.getElementById('page-'+p); pg.style.display='flex'; pg.classList.add('active');
+document.querySelectorAll('.b').forEach(function(e){e.classList.remove('active');});
+var btn=document.getElementById('b-'+p); if(btn) btn.classList.add('active');
+if(p=='shorts') loadShorts();
+if(p=='profile'||p=='settings') update();
+}
+function previewVideo(e){
+var f=e.target.files[0]; if(!f) return;
+if(f.size>100*1024*1024){alert('Video 100MB se bara hai! Chota karo');return;}
+var url=URL.createObjectURL(f);
+var v=document.getElementById('prev'); v.src=url; v.style.display='block';
+var r=new FileReader(); r.onload=function(ev){selData=ev.target.result;}; r.readAsDataURL(f);
+}
+function doUpload(){
+var d=document.getElementById('desc').value||'Sode Pede! Swat se 🏔️❤️';
+var pl=document.getElementById('place').value||'Swat, Pakistan';
+if(!selData){alert('Pehle video select karo! 📤'); document.getElementById('file').click(); return;}
+var st=document.getElementById('stat'); st.style.display='block'; st.innerText='✅ Uploading... 50%';
+setTimeout(function(){
+videos.unshift({desc:d,place:pl,video:selData,user:localStorage.getItem('wt_n')||'Abdullah - Swat 🏔️'});
+localStorage.setItem('wt_v',JSON.stringify(videos));
+st.innerText='✅ Uploaded! Puri Dunya Dekhegi! 🌍❤️';
+setTimeout(function(){show('shorts'); alert('✅ Video Upload Ho Gaya! No Error! Puri Dunya Dekhegi! 🌍🏔️');},600);
+},800);
+}
+function loadShorts(){
+var box=document.getElementById('shortsBox'); box.innerHTML='';
+var def=[{desc:'Sode Pede Main Abdullah Gulzar ❤️ Puri Dunya Tak! 🌍',place:'Swat Valley',user:'Abdullah - Swat 🏔️',flag:'🇵🇰',img:'https://picsum.photos/600/800?random=21'},{desc:'Swat ki wadiya - Jannat hai! 🏔️',place:'Mingora',user:'Ali - Mingora 🇵🇰',flag:'🇵🇰',img:'https://picsum.photos/600/800?random=22'}];
+var all=videos.map(function(v){return {desc:v.desc,place:v.place,user:v.user,flag:'🇵🇰',video:v.video}}).concat(def);
+all.forEach(function(s){
+var media=s.video?'<video src="'+s.video+'" style="width:100%;height:340px;object-fit:cover" controls loop></video>':'<img src="'+s.img+'" style="width:100%;height:340px;object-fit:cover">';
+box.innerHTML+='<div class="box" style="padding:0;overflow:hidden"><div>'+media+'</div><div style="padding:12px"><b>'+s.user+'</b> - '+s.flag+' '+s.place+'<div style="font-size:13px;margin-top:6px">'+s.desc+'</div></div></div>';
+});
+document.getElementById('vc').innerText=videos.length;
+}
+function googleLogin(){
+var n=prompt('Google naam likho - Direct Login:','Abdullah Gulzar'); if(!n) return;
+var e=n.toLowerCase().replace(/ /g,'.')+'@gmail.com';
+localStorage.setItem('wt_n',n); localStorage.setItem('wt_e',e); localStorage.setItem('wt_id','@'+n.toLowerCase().replace(/ /g,'.'));
+update(); alert('✅ Google Login Successful! Welcome '+n+'! Sode Pede! 🏔️🌍');
+}
+function update(){
+var n=localStorage.getItem('wt_n'); if(n){document.getElementById('uname').innerText=n;document.getElementById('uemail').innerText=localStorage.getItem('wt_e');document.getElementById('uid').innerText='ID: '+localStorage.getItem('wt_id');document.getElementById('sname').innerText='Name: '+n;document.getElementById('sid').innerText='ID: '+localStorage.getItem('wt_id');}
+}
+function editName(){var n=prompt('Naya naam:',localStorage.getItem('wt_n')||'Abdullah'); if(n){localStorage.setItem('wt_n',n); update(); alert('Updated! ✅');}}
+function editID(){var id=prompt('Naya ID:',localStorage.getItem('wt_id')||'@abdullah.swat'); if(id){localStorage.setItem('wt_id',id); update(); alert('ID Changed! ✅ '+id);}}
+function logout(){localStorage.clear(); videos=[]; update(); alert('Logged out!'); show('profile');}
+update(); loadShorts();
+</script>
+</body>
+</html>
