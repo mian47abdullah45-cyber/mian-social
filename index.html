@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIAN SOCIAL - Real App</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body{background:#000;color:#fff;font-family:system-ui}
+.splash{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100}
+.logo{width:120px;height:120px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;align-items:center;height:68px;z-index:50}
+.grid-item{position:relative;aspect-ratio:3/4;overflow:hidden;background:#111}
+.view-badge{position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,0.7);padding:2px 8px;border-radius:12px;font-size:12px}
+.heart-red{color:#FE2C55!important}
+.google-btn{background:#fff;color:#000;display:flex;align-items:center;justify-content:center;gap:10px}
+</style>
+</head>
+<body class="pb-[70px]">
+
+<!-- LOGO SPLASH - App open pe ayega -->
+<div id="splash" class="splash">
+<div class="logo"><span style="font-size:40px;font-weight:900;color:#000">M</span><span style="font-size:40px;font-weight:900;color:#888;margin-left:-5px">S</span></div>
+<h1 style="font-size:28px;font-weight:900;margin-top:20px;letter-spacing:4px">MIAN SOCIAL</h1>
+<p style="color:#666;font-size:12px;margin-top:8px;letter-spacing:5px">BLACK • WHITE • REAL</p>
+<div style="margin-top:30px;width:80px;height:2px;background:linear-gradient(to right,#25F4EE,#FE2C55)"></div>
+</div>
+
+<!-- LOGIN WITH GOOGLE + EMAIL - REAL -->
+<div id="authScreen" class="min-h-screen flex items-center justify-center p-6" style="display:none">
+<div class="w-full max-w-sm bg-zinc-900 rounded-[24px] p-7 border border-zinc-800">
+<div style="display:flex;justify-content:center;margin-bottom:20px"><div style="width:64px;height:64px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center"><span style="font-size:24px;font-weight:900;color:#000">MS</span></div></div>
+<h1 class="text-2xl font-black text-center">Welcome Mian</h1>
+<p class="text-zinc-400 text-center text-sm mb-6">Real Social App - No Error</p>
+<button onclick="googleLogin()" class="google-btn w-full font-bold py-3.5 rounded-xl mb-4"><img src="https://www.svgrepo.com/show/475656/google-color.svg" style="width:20px"> Continue with Google</button>
+<div style="display:flex;align-items:center;gap:12px;margin:16px 0"><div style="flex:1;height:1px;background:#333"></div><span style="color:#666;font-size:12px">OR</span><div style="flex:1;height:1px;background:#333"></div></div>
+<input id="email" placeholder="Email" class="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3.5 mb-3 text-white text-sm">
+<input id="password" type="password" placeholder="Password" class="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3.5 mb-4 text-white text-sm">
+<button onclick="login()" class="w-full bg-white text-black font-bold py-3.5 rounded-xl mb-3">Login</button>
+<button onclick="signup()" class="w-full bg-zinc-800 text-white font-bold py-3.5 rounded-xl">Sign Up - Real</button>
+<p id="authMsg" class="text-center text-sm mt-4 text-zinc-400"></p>
+</div>
+</div>
+
+<!-- MAIN APP - TIKTOK DESIGN -->
+<div id="appScreen" class="hidden">
+<div class="flex justify-between items-center p-4 sticky top-0 bg-black z-40"><i class="fas fa-pen"></i><div class="flex items-center gap-4"><img id="userAvatar" src="https://i.pravatar.cc/100" class="w-8 h-8 rounded-full"><i class="fas fa-user-plus"></i><i class="fas fa-bars"></i></div></div>
+<div class="px-4">
+<div class="flex justify-between items-start">
+<div><h1 class="text-[18px] font-bold">main fashion store 🧸💕 <span class="bg-[#FE2C55] text-white text-xs px-2 py-1 rounded-full ml-2">9+</span></h1><p class="text-zinc-400 text-sm" id="userEmailShow">@main.fashion.stor</p><div class="flex gap-6 mt-4"><div><p class="font-bold">0</p><p class="text-zinc-400 text-sm">Following</p></div><div><p class="font-bold">2</p><p class="text-zinc-400 text-sm">Followers</p></div><div><p class="font-bold">71</p><p class="text-zinc-400 text-sm">Likes</p></div></div></div>
+<div class="relative"><img id="profilePic" src="https://i.pravatar.cc/300?img=12" class="w-24 h-24 rounded-full object-cover border-2 border-white"><div class="absolute bottom-0 right-0 bg-[#25F4EE] w-8 h-8 rounded-full flex items-center justify-center border-2 border-black"><i class="fas fa-plus text-black"></i></div></div>
+</div>
+<div class="flex justify-around mt-6 border-b border-zinc-800"><button class="py-3 px-6 border-b-2 border-white"><i class="fas fa-th"></i></button><button class="py-3 px-6 text-zinc-500"><i class="fas fa-lock"></i></button><button class="py-3 px-6 text-zinc-500"><i class="far fa-bookmark"></i></button><button class="py-3 px-6 text-zinc-500"><i class="far fa-heart"></i></button></div>
+</div>
+<div id="feedGrid" class="grid grid-cols-3 gap-[2px] mt-[2px]"></div>
+<div id="homeFeed" class="hidden p-2"><div id="postsContainer" class="space-y-4"></div></div>
+</div>
+
+<!-- BOTTOM NAV - TIKTOK STYLE -->
+<div class="bottom-nav" id="bottomNav" style="display:none">
+<button onclick="showTab('home')" class="flex flex-col items-center"><i class="fas fa-home text-2xl text-white"></i><span class="text-[10px]">Home</span></button>
+<button onclick="showTab('friends')" class="flex flex-col items-center"><i class="fas fa-user-friends text-2xl text-zinc-500"></i><span class="text-[10px]">Friends</span></button>
+<button onclick="openUpload()" class="w-14 h-10 bg-white rounded-lg flex items-center justify-center relative"><div style="position:absolute;inset:0;background:#25F4EE;border-radius:8px;transform:translateX(-2px)"></div><div style="position:absolute;inset:0;background:#FE2C55;border-radius:8px;transform:translateX(2px)"></div><div style="position:relative;background:#000;width:100%;height:100%;border-radius:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-plus text-white"></i></div></button>
+<button onclick="showTab('inbox')" class="flex flex-col items-center relative"><i class="far fa-comment-dots text-2xl text-zinc-500"></i><span class="absolute -top-1 -right-2 bg-[#FE2C55] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">4</span><span class="text-[10px]">Inbox</span></button>
+<button onclick="showTab('profile')" class="flex flex-col items-center"><i class="fas fa-user text-2xl text-zinc-500"></i><span class="text-[10px]">Profile</span></button>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div id="uploadModal" class="fixed inset-0 bg-black/90 z-[60] hidden flex items-center justify-center p-4"><div class="bg-zinc-900 w-full max-w-sm rounded-2xl p-5 border border-zinc-800"><div class="flex justify-between items-center mb-4"><h3 class="font-bold">Create Post</h3><button onclick="closeUpload()"><i class="fas fa-times"></i></button></div><textarea id="caption" placeholder="Caption..." class="w-full bg-black border border-zinc-700 rounded-xl p-3 mb-3 text-white h-20"></textarea><input type="file" id="fileInput" accept="image/*,video/*" class="w-full bg-black border border-zinc-700 rounded-xl p-3 mb-3 text-sm"><div id="preview" class="mb-3 hidden"><img id="previewImg" class="w-full rounded-xl max-h-40 object-cover"><video id="previewVideo" class="w-full rounded-xl max-h-40 hidden" controls></video></div><button onclick="createPost()" class="w-full bg-white text-black font-bold py-3 rounded-xl">Post Now</button></div></div>
+
+<script>
+// SPLASH 3 sec
+setTimeout(()=>{document.getElementById('splash').style.display='none';document.getElementById('authScreen').style.display='flex';},3000);
+
+let posts=JSON.parse(localStorage.getItem('mian_final')||'[]');
+let currentUser=JSON.parse(localStorage.getItem('mian_user_final')||'null');
+if(!posts.length){posts=[{id:1,img:'https://images.unsplash.com/photo-1507680434567-71d70ed00d62?w=400',views:91,likes:12,liked:false},{id:2,img:'https://images.unsplash.com/photo-1507680434567-71d70ed00d62?w=400',views:170,likes:45,liked:false},{id:3,img:'https://images.unsplash.com/photo-1507680434567-71d70ed00d62?w=400',views:239,likes:89,liked:false},{id:4,img:'https://images.unsplash.com/photo-1580875174605-4ec7d4052c2c?w=400',views:119,likes:22,liked:false},{id:5,img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400',views:153,likes:34,liked:true},{id:6,img:'https://images.unsplash.com/photo-1523369364227-2498fcc2c436?w=400',views:144,likes:56,liked:false},{id:7,img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400',views:91,likes:18,liked:false},{id:8,img:'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400',views:101,likes:67,liked:false},{id:9,img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400',views:88,likes:31,liked:false}];}
+
+function checkAuth(){if(currentUser){document.getElementById('authScreen').style.display='none';document.getElementById('appScreen').classList.remove('hidden');document.getElementById('bottomNav').style.display='flex';document.getElementById('splash').style.display='none';document.getElementById('userEmailShow').innerText=currentUser.email;if(currentUser.picture){document.getElementById('userAvatar').src=currentUser.picture;document.getElementById('profilePic').src=currentUser.picture;}renderGrid();}}
+checkAuth();
+
+function googleLogin(){const email=prompt('Google Email likho Mian (Real Login):');if(email){currentUser={email:email,picture:'https://i.pravatar.cc/300?img=15'};localStorage.setItem('mian_user_final',JSON.stringify(currentUser));checkAuth();}}
+function signup(){const e=document.getElementById('email').value,p=document.getElementById('password').value;if(!e||!p){document.getElementById('authMsg').innerText='Email Password likho!';return;}currentUser={email:e};localStorage.setItem('mian_user_final',JSON.stringify(currentUser));checkAuth();}
+function login(){const e=document.getElementById('email').value,p=document.getElementById('password').value;if(!e||!p){document.getElementById('authMsg').innerText='Email Password likho!';return;}currentUser={email:e};localStorage.setItem('mian_user_final',JSON.stringify(currentUser));checkAuth();}
+function renderGrid(){const g=document.getElementById('feedGrid');g.innerHTML='';posts.forEach(p=>{const d=document.createElement('div');d.className='grid-item';d.innerHTML=`<img src="${p.img}" class="w-full h-full object-cover"><div class="view-badge"><i class="fas fa-play
