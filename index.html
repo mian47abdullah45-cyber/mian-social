@@ -3,93 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIAN SHOSAL - MGA</title>
+<title>MIAN SHOSAL MGA - World App</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#7C3AED">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#060312;color:#fff;min-height:100vh}
-.header{background:linear-gradient(180deg,#1a1350,#060312);padding:12px 15px;position:sticky;top:0;z-index:100;border-bottom:2px solid #FFD60A;display:flex;align-items:center;gap:12px}
-.logo-img{width:50px;height:50px;border-radius:50%;border:2px solid #FFD60A}
-.logo-text{font-weight:900;font-size:20px} .logo-text span{color:#7C3AED} .logo-text i{color:#FFD60A;font-style:normal}
-.earn{background:linear-gradient(90deg,#FFD60A,#FF8A00);color:#000;padding:10px 14px;display:flex;justify-content:space-between;font-weight:900;position:sticky;top:76px;z-index:90}
-.earn button{background:#000;color:#FFD60A;border:none;padding:7px 14px;border-radius:20px;font-weight:900}
-.container{max-width:600px;margin:0 auto}
-.box{background:#13102a;margin:10px;border-radius:20px;padding:14px;border:1px solid #3a3490}
-textarea{width:100%;background:#0c0a1f;color:#fff;border:1px solid #5b4cdb;border-radius:14px;padding:12px;outline:none}
-.hd-row{display:flex;gap:8px;margin-top:10px}
-.hd-btn{flex:1;padding:13px;border:none;border-radius:14px;font-weight:900;font-size:13px;color:#fff}
-.b1{background:linear-gradient(135deg,#7C3AED,#EC4899)} .b2{background:linear-gradient(135deg,#06B6D4,#3B82F6)} .b3{background:linear-gradient(135deg,#FFD60A,#FF8A00);color:#000}
-.post{background:#13102a;margin:10px;border-radius:20px;padding:14px;border:1px solid #3a3490}
-.post img{width:100%;border-radius:14px;margin-top:10px;max-height:400px;object-fit:cover}
-.footer{text-align:center;padding:20px;opacity:.4;font-size:11px}
-input[type=file]{display:none}
-.upload-label{background:#1f1a4d;padding:8px 12px;border-radius:10px;font-size:12px;border:1px dashed #7C3AED;display:inline-block;margin:5px 5px 0 0}
+body{background:#0a0a0f;color:#fff;padding-bottom:80px}
+.header{background:#111119;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;border-bottom:1px solid #222}
+.logo{width:44px;height:44px;background:linear-gradient(135deg,#7C3AED,#FFD60A);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px}
+.earn-top{background:linear-gradient(90deg,#FFD60A,#FF9500);color:#000;padding:8px 16px;display:flex;justify-content:space-between;font-weight:800;font-size:14px}
+.pages{display:none} .pages.active{display:block}
+.box{background:#15151f;margin:12px;border-radius:16px;padding:14px;border:1px solid #222232}
+textarea{width:100%;background:#0f0f17;color:#fff;border:1px solid #2a2a3a;border-radius:12px;padding:12px;outline:none}
+.real-btn{display:flex;align-items:center;gap:8px;background:#1e1e2e;padding:10px 14px;border-radius:12px;border:1px solid #2a2a4a;font-size:13px;font-weight:600;color:#ccc}
+.post-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.pbtn{padding:12px;border:none;border-radius:12px;font-weight:800;color:#fff;font-size:13px}
+.post{background:#15151f;margin:12px;border-radius:16px;padding:14px;border:1px solid #222232}
+.post img,.post video{width:100%;border-radius:12px;margin-top:10px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#111119;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:200}
+.b-item{flex:1;text-align:center;padding:6px;font-size:11px;opacity:.6;cursor:pointer} .b-item.active{opacity:1;color:#FFD60A} .b-item div{font-size:20px}
+.stat{display:flex;justify-content:space-around;text-align:center;padding:12px 0}
+.stat b{font-size:18px;display:block}
+.lang-btn{background:#1e1e2e;border:1px solid #FFD60A;padding:6px 12px;border-radius:20px;font-size:11px;color:#FFD60A;font-weight:800}
+.lang-sheet{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:500;display:none;align-items:end}
+.lang-sheet.show{display:flex}
+.lang-list{background:#15151f;width:100%;max-height:85vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px}
+.lang-item{padding:14px;border-bottom:1px solid #222;display:flex;justify-content:space-between;cursor:pointer}
 </style>
 </head>
 <body>
+
 <div class="header">
-<img src="logo.png" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=MGA&background=7C3AED&color=fff'">
-<div><div class="logo-text">MIAN <span>SHOSAL</span> <i>MGA</i></div><div style="font-size:10px;opacity:.6">BY MIAN ABDULLAH GULZAR - HD WORLD</div></div>
-<div style="margin-left:auto">🇵🇰</div>
+<div class="logo">MG</div>
+<div style="flex:1"><div style="font-weight:900">MIAN SHOSAL <span style="color:#7C3AED">MGA</span></div><div style="font-size:10px;opacity:.5" id="t-by">BY MIAN ABDULLAH GULZAR</div></div>
+<button class="lang-btn" onclick="openLang()">🌍 <span id="curLang">EN</span> ▼</button>
+<div style="font-size:20px">🔔</div>
 </div>
 
-<div class="earn container"><div>💰 <span id="coins">0</span> Coins | $<span id="dol">0.00</span></div><button onclick="addCoin()">AD +100 🤑</button></div>
+<div class="earn-top"><span>💰 <span id="coins">1150</span> Coins | $<span id="dol">1.15</span></span><span style="background:#000;color:#FFD60A;padding:4px 12px;border-radius:20px" onclick="addCoin()" id="t-ad">AD +100 🤑</span></div>
 
-<div class="container">
+<!-- PAGE 1: HOME -->
+<div id="page-home" class="pages active">
 <div class="box">
-<textarea id="txt" rows="3" placeholder="Mian, kya soch rahe ho? Yahan likho..."></textarea>
-<div style="margin-top:8px">
-<label class="upload-label" for="photo">📸 1- Photo Add</label>
-<label class="upload-label" for="video">🎥 2- Video Add</label>
-<input type="file" id="photo" accept="image/*" onchange="loadFile(this,'img')">
-<input type="file" id="video" accept="video/*" onchange="loadFile(this,'vid')">
+<textarea id="txt" rows="3" placeholder="Mian, kya soch rahe ho?"></textarea>
+<div style="display:flex;gap:8px;margin-top:12px">
+<label class="real-btn" for="photo">🖼️ <span id="t-photo">Photo</span></label>
+<label class="real-btn" for="video">🎬 <span id="t-video">Video</span></label>
+<label class="real-btn">📍 <span id="t-live">Live</span></label>
+<input type="file" id="photo" accept="image/*" style="display:none" onchange="loadFile(this,'img')">
+<input type="file" id="video" accept="video/*" style="display:none" onchange="loadFile(this,'vid')">
+</div>
 <div id="preview" style="margin-top:10px"></div>
+<div class="post-btns">
+<button class="pbtn" style="background:linear-gradient(135deg,#7C3AED,#EC4899)" onclick="postNow()" id="t-post">POST NOW 🚀</button>
+<button class="pbtn" style="background:#222232" onclick="render()" id="t-refresh">REFRESH ↻</button>
+<button class="pbtn" style="background:linear-gradient(135deg,#FFD60A,#FF8A00);color:#000" onclick="showPage('earn',null)" id="t-earn">EARN 👑</button>
 </div>
-<div class="hd-row">
-<button class="hd-btn b1" onclick="postNow()">POST NOW 🚀</button>
-<button class="hd-btn b2" onclick="location.reload()">HD REFRESH ✨</button>
-<button class="hd-btn b3" onclick="goPremium()">PREMIUM 👑</button>
 </div>
-<div style="font-size:10px;opacity:.5;text-align:center;margin-top:8px">1=Photo | 2=Video | Har Post +50 Coins | 1000 Coins = $1</div>
-</div>
-
 <div id="feed"></div>
-<div class="footer">© 2026 MIAN SHOSAL MGA<br>HD • MGA Logo • Photo/Video • Earn Money<br>Made in Tikdarai, Swat - Global App</div>
 </div>
 
-<script>
-let coins=parseInt(localStorage.getItem('mian_coins')||'100');
-let posts=JSON.parse(localStorage.getItem('mga_posts')||'[]');
-let tempMedia=null,tempType=null;
-function update(){document.getElementById('coins').innerText=coins;document.getElementById('dol').innerText=(coins/1000).toFixed(2);localStorage.setItem('mian_coins',coins);}
-update();
-function addCoin(){coins+=100;update();alert('Mian +100 Coins! 🥳')}
-function goPremium(){alert('MGA PREMIUM $2 👑\n\n✓ Blue Tick\n✓ Post Top pe\n✓ No Ads\n\nJazzCash se contact karo!'); coins+=200; update();}
-function loadFile(input,type){
-  let file=input.files[0]; if(!file) return;
-  let reader=new FileReader(); reader.onload=e=>{
-    tempMedia=e.target.result; tempType=type;
-    document.getElementById('preview').innerHTML= type=='img' ? `<img src="${tempMedia}" style="width:100%;border-radius:12px;max-height:200px;object-fit:cover">` : `<video src="${tempMedia}" controls style="width:100%;border-radius:12px"></video>`;
-  }; reader.readAsDataURL(file);
-}
-function postNow(){
-  let t=document.getElementById('txt').value.trim(); if(!t && !tempMedia) return alert('Kuch likho ya photo/video add karo Mian! 🥺');
-  posts.push({text:t, media:tempMedia, mtype:tempType, time:Date.now(), likes:Math.floor(Math.random()*100)+5});
-  localStorage.setItem('mga_posts',JSON.stringify(posts));
-  document.getElementById('txt').value=''; document.getElementById('preview').innerHTML=''; tempMedia=null; tempType=null;
-  coins+=50; update(); render();
-}
-function render(){
-  let f=document.getElementById('feed'); f.innerHTML='';
-  [...posts].reverse().forEach(p=>{
-    let m = p.media ? (p.mtype=='img' ? `<img src="${p.media}">` : `<video src="${p.media}" controls style="width:100%;border-radius:14px;margin-top:10px"></video>`) : '';
-    f.innerHTML+=`<div class="post"><div style="display:flex;gap:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%" onerror="this.src='https://ui-avatars.com/api/?name=MGA&background=7C3AED&color=fff'"><div><b>Mian Abdullah - MGA</b><div style="font-size:11px;opacity:.6">Tikdarai • HD Post • Global</div></div></div><div style="margin:12px 0;white-space:pre-wrap">${p.text}</div>${m}<div style="display:flex;justify-content:space-around;border-top:1px solid #2a2570;margin-top:12px;padding-top:10px;font-size:13px"><span>❤️ ${p.likes}</span><span>💬 Comment</span><span>↗️ Share</span><span>💰 ${p.likes*2} Coins</span></div></div>`;
-  });
-  if(posts.length==0) f.innerHTML=`<div class="post" style="text-align:center;opacity:.7">👋 MGA Welcome! 1-Photo 2-Video ke saath pehla HD post karo Mian!</div>`;
-}
-render();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-</script>
-</body>
-</html>
+<!-- PAGE 2: VIDEO -->
+<div id="page-video" class="pages">
+<div class="box" style="text-align:center;padding:30px"><div style="font-size:50px">🎬</div><h3 id="t-vhead">Video Feed - MGA</h3><p style="opacity:.6;margin-top:8px;font-size:13px" id="t-vdesc">Yahan TikTok jaisi videos ayengi - Puri duniya ki</p><button class="pbtn" style="background:#7C3AED;margin-top:15px;width:100%" onclick="alert('Video upload: Photo wale button se video select karo!')" id="t-upv">+ Upload Video</button></div>
+<div id="videoFeed"></div>
+</div>
+
+<!-- PAGE 3: EARN -->
+<div id="page-earn" class="pages">
+<div class="box"><h3 id="t-earnTitle">💰 Earn Money - Real</h3>
+<div class="stat"><div><b id="e1">1150</b><span style="font-size:11px;opacity:.6">Coins</span></div><div><b>$1.15</b><span style="font-size:11px;opacity:.6">Dollars</span></div><div><b id="e2">12</b><span style="font-size:11px;opacity:.6">Posts</span></div></div>
+<div style="background:#0f0f17;border-radius:12px;padding:12px;margin-top:10px">
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222"><span id="t-watch">📺 Watch Ad</span><b
