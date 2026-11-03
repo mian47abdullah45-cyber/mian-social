@@ -2,88 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>MIAN SHOSAL - Your World Your Voice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIAN SHOSAL - MGA</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#7C3AED">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
 body{background:#060312;color:#fff;min-height:100vh}
-.hd-header{background:linear-gradient(180deg,#1a1350,#0a081f);padding:14px 15px;position:sticky;top:0;z-index:100;border-bottom:2px solid #7C3AED;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:22px;letter-spacing:1.5px} .logo span{color:#7C3AED}
-.tag{font-size:9px;opacity:.6;letter-spacing:1px}
-.earn-bar{background:linear-gradient(90deg,#FFD60A,#FF8A00);color:#000;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px;position:sticky;top:58px;z-index:90}
-.earn-bar button{background:#000;color:#FFD60A;border:none;padding:6px 12px;border-radius:20px;font-weight:800}
+.header{background:linear-gradient(180deg,#1a1350,#060312);padding:12px 15px;position:sticky;top:0;z-index:100;border-bottom:2px solid #FFD60A;display:flex;align-items:center;gap:12px}
+.logo-img{width:50px;height:50px;border-radius:50%;border:2px solid #FFD60A}
+.logo-text{font-weight:900;font-size:20px} .logo-text span{color:#7C3AED} .logo-text i{color:#FFD60A;font-style:normal}
+.earn{background:linear-gradient(90deg,#FFD60A,#FF8A00);color:#000;padding:10px 14px;display:flex;justify-content:space-between;font-weight:900;position:sticky;top:76px;z-index:90}
+.earn button{background:#000;color:#FFD60A;border:none;padding:7px 14px;border-radius:20px;font-weight:900}
 .container{max-width:600px;margin:0 auto}
-.create{background:#13102a;margin:10px;border-radius:18px;padding:14px;border:1px solid #2a2570}
-.create textarea{width:100%;background:#0c0a1f;color:#fff;border:1px solid #3a3490;border-radius:12px;padding:12px;outline:none;resize:none;font-size:14px}
-.row{display:flex;gap:8px;margin-top:10px}
-.btn{flex:1;background:#7C3AED;color:#fff;border:none;padding:12px;border-radius:12px;font-weight:800;font-size:14px}
-.btn2{background:#1f1a4d}
-.post{background:#13102a;margin:10px;border-radius:18px;padding:14px;border:1px solid #2a2570;animation:pop .3s}
-@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
-.post-head{display:flex;gap:10px;align-items:center}
-.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#EC4899);display:flex;align-items:center;justify-content:center;font-weight:900}
-.post-text{margin:12px 0;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
-.post-actions{display:flex;justify-content:space-around;border-top:1px solid #2a2570;padding-top:10px;margin-top:10px}
-.post-actions span{font-size:13px;opacity:.8}
-.footer{text-align:center;padding:25px 10px;opacity:.4;font-size:11px;line-height:1.6}
+.box{background:#13102a;margin:10px;border-radius:20px;padding:14px;border:1px solid #3a3490}
+textarea{width:100%;background:#0c0a1f;color:#fff;border:1px solid #5b4cdb;border-radius:14px;padding:12px;outline:none}
+.hd-row{display:flex;gap:8px;margin-top:10px}
+.hd-btn{flex:1;padding:13px;border:none;border-radius:14px;font-weight:900;font-size:13px;color:#fff}
+.b1{background:linear-gradient(135deg,#7C3AED,#EC4899)} .b2{background:linear-gradient(135deg,#06B6D4,#3B82F6)} .b3{background:linear-gradient(135deg,#FFD60A,#FF8A00);color:#000}
+.post{background:#13102a;margin:10px;border-radius:20px;padding:14px;border:1px solid #3a3490}
+.post img{width:100%;border-radius:14px;margin-top:10px;max-height:400px;object-fit:cover}
+.footer{text-align:center;padding:20px;opacity:.4;font-size:11px}
+input[type=file]{display:none}
+.upload-label{background:#1f1a4d;padding:8px 12px;border-radius:10px;font-size:12px;border:1px dashed #7C3AED;display:inline-block;margin:5px 5px 0 0}
 </style>
 </head>
 <body>
-<div class="hd-header">
-<div><div class="logo">MIAN <span>SHOSAL</span></div><div class="tag">BY MIAN ABDULLAH GULZAR - HD WORLD APP</div></div>
-<div style="text-align:right"><div style="font-size:11px;opacity:.7">TIKDARAI</div><div style="font-size:18px">🇵🇰</div></div>
+<div class="header">
+<img src="logo.png" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=MGA&background=7C3AED&color=fff'">
+<div><div class="logo-text">MIAN <span>SHOSAL</span> <i>MGA</i></div><div style="font-size:10px;opacity:.6">BY MIAN ABDULLAH GULZAR - HD WORLD</div></div>
+<div style="margin-left:auto">🇵🇰</div>
 </div>
 
-<div class="earn-bar container">
-<div>💰 <span id="coinCount">0</span> Coins | $ <span id="dollar">0.00</span></div>
-<button onclick="watchAd()">WATCH AD +100 🤑</button>
-</div>
+<div class="earn container"><div>💰 <span id="coins">0</span> Coins | $<span id="dol">0.00</span></div><button onclick="addCoin()">AD +100 🤑</button></div>
 
 <div class="container">
-<div class="create">
-<textarea id="txt" rows="3" placeholder="Mian, duniya ko kya batana hai? Yahan likho..."></textarea>
-<div class="row">
-<button class="btn" onclick="postNow()">POST NOW 🚀</button>
-<button class="btn btn2" onclick="goPremium()">PREMIUM $2 👑</button>
+<div class="box">
+<textarea id="txt" rows="3" placeholder="Mian, kya soch rahe ho? Yahan likho..."></textarea>
+<div style="margin-top:8px">
+<label class="upload-label" for="photo">📸 1- Photo Add</label>
+<label class="upload-label" for="video">🎥 2- Video Add</label>
+<input type="file" id="photo" accept="image/*" onchange="loadFile(this,'img')">
+<input type="file" id="video" accept="video/*" onchange="loadFile(this,'vid')">
+<div id="preview" style="margin-top:10px"></div>
 </div>
-<div style="font-size:10px;opacity:.5;margin-top:8px;text-align:center">Har post pe +50 Coins | 1000 Coins = $1 | Withdraw via JazzCash</div>
+<div class="hd-row">
+<button class="hd-btn b1" onclick="postNow()">POST NOW 🚀</button>
+<button class="hd-btn b2" onclick="location.reload()">HD REFRESH ✨</button>
+<button class="hd-btn b3" onclick="goPremium()">PREMIUM 👑</button>
+</div>
+<div style="font-size:10px;opacity:.5;text-align:center;margin-top:8px">1=Photo | 2=Video | Har Post +50 Coins | 1000 Coins = $1</div>
 </div>
 
 <div id="feed"></div>
-
-<div class="footer">© 2026 MIAN SHOSAL<br>Your World Your Voice - Made in Tikdarai, Swat<br>HD • No Error • Global • Earn Money<br>Paisa kamane ke liye roz post karo, ad dekho</div>
+<div class="footer">© 2026 MIAN SHOSAL MGA<br>HD • MGA Logo • Photo/Video • Earn Money<br>Made in Tikdarai, Swat - Global App</div>
 </div>
 
 <script>
-let coins = parseInt(localStorage.getItem('mian_coins')||'0');
-let posts = JSON.parse(localStorage.getItem('mian_posts')||'[]');
-const $ = id => document.getElementById(id);
-function updateMoney(){ $('coinCount').innerText = coins; $('dollar').innerText = (coins/1000).toFixed(2); localStorage.setItem('mian_coins', coins); }
-updateMoney();
-
-function watchAd(){
-  coins+=100; updateMoney();
-  alert('Mian +100 Coins! 💰\n\nTip: Roz 10 Ads = $1\n1000 users dekhenge to apko roz $15 Google Ads se aayega!');
-}
-function goPremium(){
-  alert('Premium Feature:\n\n1. Apki post puri duniya me top pe jayegi\n2. Ads nahi ayenge\n3. Blue Tick milega\n\nJazzCash: Apka Number\nPayPal: Future me add hoga\n\nAbhi ke liye FREE me use karo Mian!');
-  coins+=500; updateMoney();
+let coins=parseInt(localStorage.getItem('mian_coins')||'100');
+let posts=JSON.parse(localStorage.getItem('mga_posts')||'[]');
+let tempMedia=null,tempType=null;
+function update(){document.getElementById('coins').innerText=coins;document.getElementById('dol').innerText=(coins/1000).toFixed(2);localStorage.setItem('mian_coins',coins);}
+update();
+function addCoin(){coins+=100;update();alert('Mian +100 Coins! 🥳')}
+function goPremium(){alert('MGA PREMIUM $2 👑\n\n✓ Blue Tick\n✓ Post Top pe\n✓ No Ads\n\nJazzCash se contact karo!'); coins+=200; update();}
+function loadFile(input,type){
+  let file=input.files[0]; if(!file) return;
+  let reader=new FileReader(); reader.onload=e=>{
+    tempMedia=e.target.result; tempType=type;
+    document.getElementById('preview').innerHTML= type=='img' ? `<img src="${tempMedia}" style="width:100%;border-radius:12px;max-height:200px;object-fit:cover">` : `<video src="${tempMedia}" controls style="width:100%;border-radius:12px"></video>`;
+  }; reader.readAsDataURL(file);
 }
 function postNow(){
-  let t = $('txt').value.trim();
-  if(!t) return alert('Mian kuch likho pehle! 🥺');
-  posts.push({text:t, time: Date.now(), likes: Math.floor(Math.random()*50)+1});
-  localStorage.setItem('mian_posts', JSON.stringify(posts));
-  $('txt').value=''; coins+=50; updateMoney(); render();
+  let t=document.getElementById('txt').value.trim(); if(!t && !tempMedia) return alert('Kuch likho ya photo/video add karo Mian! 🥺');
+  posts.push({text:t, media:tempMedia, mtype:tempType, time:Date.now(), likes:Math.floor(Math.random()*100)+5});
+  localStorage.setItem('mga_posts',JSON.stringify(posts));
+  document.getElementById('txt').value=''; document.getElementById('preview').innerHTML=''; tempMedia=null; tempType=null;
+  coins+=50; update(); render();
 }
 function render(){
-  let f=$('feed'); f.innerHTML='';
-  [...posts].reverse().forEach((p,i)=>{
-    f.innerHTML+=`<div class="post"><div class="post-head"><div class="avatar">M</div><div><b>Mian Abdullah</b><div style="font-size:11px;opacity:.6">Tikdarai • Just Now • Global</div></div></div><div class="post-text">${p.text.replace(/</g,'&lt;')}</div><div class="post-actions"><span onclick="this.innerText='❤️ '+(parseInt(this.innerText.split(' ')[1])+1)+' Liked'">❤️ ${p.likes} Likes</span><span>💬 Comment</span><span>↗️ Share</span><span>💰 Earn</span></div></div>`;
+  let f=document.getElementById('feed'); f.innerHTML='';
+  [...posts].reverse().forEach(p=>{
+    let m = p.media ? (p.mtype=='img' ? `<img src="${p.media}">` : `<video src="${p.media}" controls style="width:100%;border-radius:14px;margin-top:10px"></video>`) : '';
+    f.innerHTML+=`<div class="post"><div style="display:flex;gap:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%" onerror="this.src='https://ui-avatars.com/api/?name=MGA&background=7C3AED&color=fff'"><div><b>Mian Abdullah - MGA</b><div style="font-size:11px;opacity:.6">Tikdarai • HD Post • Global</div></div></div><div style="margin:12px 0;white-space:pre-wrap">${p.text}</div>${m}<div style="display:flex;justify-content:space-around;border-top:1px solid #2a2570;margin-top:12px;padding-top:10px;font-size:13px"><span>❤️ ${p.likes}</span><span>💬 Comment</span><span>↗️ Share</span><span>💰 ${p.likes*2} Coins</span></div></div>`;
   });
-  if(posts.length==0){ f.innerHTML=`<div class="post" style="text-align:center;opacity:.7">👋 Welcome Mian! Pehla post karo - Puri duniya dekhegi!</div>`; }
+  if(posts.length==0) f.innerHTML=`<div class="post" style="text-align:center;opacity:.7">👋 MGA Welcome! 1-Photo 2-Video ke saath pehla HD post karo Mian!</div>`;
 }
 render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
