@@ -1,76 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIAN SHOSAL MGA - World App</title>
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MIAN SHOSAL - Reels</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#0a0a0f;color:#fff;padding-bottom:80px}
-.header{background:#111119;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;border-bottom:1px solid #222}
-.logo{width:44px;height:44px;background:linear-gradient(135deg,#7C3AED,#FFD60A);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:16px}
-.earn-top{background:linear-gradient(90deg,#FFD60A,#FF9500);color:#000;padding:8px 16px;display:flex;justify-content:space-between;font-weight:800;font-size:14px}
-.pages{display:none} .pages.active{display:block}
-.box{background:#15151f;margin:12px;border-radius:16px;padding:14px;border:1px solid #222232}
-textarea{width:100%;background:#0f0f17;color:#fff;border:1px solid #2a2a3a;border-radius:12px;padding:12px;outline:none}
-.real-btn{display:flex;align-items:center;gap:8px;background:#1e1e2e;padding:10px 14px;border-radius:12px;border:1px solid #2a2a4a;font-size:13px;font-weight:600;color:#ccc}
-.post-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
-.pbtn{padding:12px;border:none;border-radius:12px;font-weight:800;color:#fff;font-size:13px}
-.post{background:#15151f;margin:12px;border-radius:16px;padding:14px;border:1px solid #222232}
-.post img,.post video{width:100%;border-radius:12px;margin-top:10px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#111119;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:200}
-.b-item{flex:1;text-align:center;padding:6px;font-size:11px;opacity:.6;cursor:pointer} .b-item.active{opacity:1;color:#FFD60A} .b-item div{font-size:20px}
-.stat{display:flex;justify-content:space-around;text-align:center;padding:12px 0}
-.stat b{font-size:18px;display:block}
-.lang-btn{background:#1e1e2e;border:1px solid #FFD60A;padding:6px 12px;border-radius:20px;font-size:11px;color:#FFD60A;font-weight:800}
-.lang-sheet{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:500;display:none;align-items:end}
-.lang-sheet.show{display:flex}
-.lang-list{background:#15151f;width:100%;max-height:85vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px}
-.lang-item{padding:14px;border-bottom:1px solid #222;display:flex;justify-content:space-between;cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:system-ui;overflow:hidden}
+.header{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,rgba(0,0,0,.8),transparent);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:18px} .logo span{color:#FFD60A}
+.reels{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+.reel{height:100vh;width:100%;position:relative;scroll-snap-align:start;background:#111;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.reel img,.reel video{width:100%;height:100%;object-fit:cover}
+.overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);padding:20px 16px 90px 16px}
+.user{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#FFD60A);display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #fff}
+.right{position:absolute;right:12px;bottom:100px;display:flex;flex-direction:column;gap:20px;align-items:center}
+.icon{width:50px;height:50px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2)}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0;z-index:100}
+.b{opacity:.6;text-align:center;font-size:10px} .b.active{opacity:1;color:#FFD60A} .b div{font-size:22px}
+.upload{position:fixed;bottom:80px;right:16px;width:60px;height:60px;background:linear-gradient(135deg,#7C3AED,#FFD60A);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;z-index:90;box-shadow:0 4px 20px rgba(124,58,237,.5)}
 </style>
 </head>
 <body>
 
 <div class="header">
-<div class="logo">MG</div>
-<div style="flex:1"><div style="font-weight:900">MIAN SHOSAL <span style="color:#7C3AED">MGA</span></div><div style="font-size:10px;opacity:.5" id="t-by">BY MIAN ABDULLAH GULZAR</div></div>
-<button class="lang-btn" onclick="openLang()">🌍 <span id="curLang">EN</span> ▼</button>
-<div style="font-size:20px">🔔</div>
+<div class="logo">MIAN <span>SHOSAL</span> MGA</div>
+<div style="display:flex;gap:12px;align-items:center"><span>🔍</span><span>💰 <span id="coins">0</span></span></div>
 </div>
 
-<div class="earn-top"><span>💰 <span id="coins">1150</span> Coins | $<span id="dol">1.15</span></span><span style="background:#000;color:#FFD60A;padding:4px 12px;border-radius:20px" onclick="addCoin()" id="t-ad">AD +100 🤑</span></div>
-
-<!-- PAGE 1: HOME -->
-<div id="page-home" class="pages active">
-<div class="box">
-<textarea id="txt" rows="3" placeholder="Mian, kya soch rahe ho?"></textarea>
-<div style="display:flex;gap:8px;margin-top:12px">
-<label class="real-btn" for="photo">🖼️ <span id="t-photo">Photo</span></label>
-<label class="real-btn" for="video">🎬 <span id="t-video">Video</span></label>
-<label class="real-btn">📍 <span id="t-live">Live</span></label>
-<input type="file" id="photo" accept="image/*" style="display:none" onchange="loadFile(this,'img')">
-<input type="file" id="video" accept="video/*" style="display:none" onchange="loadFile(this,'vid')">
-</div>
-<div id="preview" style="margin-top:10px"></div>
-<div class="post-btns">
-<button class="pbtn" style="background:linear-gradient(135deg,#7C3AED,#EC4899)" onclick="postNow()" id="t-post">POST NOW 🚀</button>
-<button class="pbtn" style="background:#222232" onclick="render()" id="t-refresh">REFRESH ↻</button>
-<button class="pbtn" style="background:linear-gradient(135deg,#FFD60A,#FF8A00);color:#000" onclick="showPage('earn',null)" id="t-earn">EARN 👑</button>
-</div>
-</div>
-<div id="feed"></div>
+<div class="reels" id="reels">
+<!-- Reels will come here -->
 </div>
 
-<!-- PAGE 2: VIDEO -->
-<div id="page-video" class="pages">
-<div class="box" style="text-align:center;padding:30px"><div style="font-size:50px">🎬</div><h3 id="t-vhead">Video Feed - MGA</h3><p style="opacity:.6;margin-top:8px;font-size:13px" id="t-vdesc">Yahan TikTok jaisi videos ayengi - Puri duniya ki</p><button class="pbtn" style="background:#7C3AED;margin-top:15px;width:100%" onclick="alert('Video upload: Photo wale button se video select karo!')" id="t-upv">+ Upload Video</button></div>
-<div id="videoFeed"></div>
+<div class="upload" onclick="document.getElementById('file').click()">+</div>
+<input type="file" id="file" accept="image/*,video/*" style="display:none" onchange="addReel(this)">
+
+<div class="bottom">
+<div class="b active"><div>🏠</div>Home</div>
+<div class="b"><div>🔍</div>Search</div>
+<div class="b"><div>🎬</div>Reels</div>
+<div class="b"><div>💰</div>Earn</div>
+<div class="b"><div>👤</div>You</div>
 </div>
 
-<!-- PAGE 3: EARN -->
-<div id="page-earn" class="pages">
-<div class="box"><h3 id="t-earnTitle">💰 Earn Money - Real</h3>
-<div class="stat"><div><b id="e1">1150</b><span style="font-size:11px;opacity:.6">Coins</span></div><div><b>$1.15</b><span style="font-size:11px;opacity:.6">Dollars</span></div><div><b id="e2">12</b><span style="font-size:11px;opacity:.6">Posts</span></div></div>
-<div style="background:#0f0f17;border-radius:12px;padding:12px;margin-top:10px">
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222"><span id="t-watch">📺 Watch Ad</span><b
+<script>
+let coins = parseInt(localStorage.getItem('mian_coins')||'0');
+document.getElementById('coins').innerText=coins;
+let reelsData = JSON.parse(localStorage.getItem('mga_reels')||'[]');
+
+// Default 3 reels agar koi nahi
+if(reelsData.length==0){
+  reelsData=[
+    {text:'Welcome to MIAN SHOSAL MGA! 🔥\nTikdarai, Swat se puri duniya tak!', img:'https://picsum.photos/seed/mga1/720/1280', likes:1250},
+    {text:'Mian Abdullah Gulzar ka app! 🇵🇰\nAb Insta jaisa scroll karo!', img:'https://picsum.photos/seed/mga2/720/1280', likes:890},
+    {text:'Photo/Video upload karo + button se!\nPaisa kamao! 💰', img:'https://picsum.photos/seed/mga3/720/1280', likes:2100},
+  ];
+}
+
+function render(){
+  let r=document.getElementById('reels'); r.innerHTML='';
+  reelsData.slice().reverse().forEach((item,i)=>{
+    let isVideo = item.img && item.img.startsWith('data:video');
+    let media = isVideo ? `<video src="${item.img}" loop autoplay muted playsinline style="width:100%;height:100%;object-fit:cover"></video>` : `<img src="${item.img}">`;
+    r.innerHTML+=`
+    <div class="reel">
+      ${media}
+      <div class="overlay">
+        <div class="user"><div class="avatar">M</div><div><b>Mian Abdullah • MGA</b> <span style="background:#FFD60A;color:#000;padding:2px 6px;border-radius:10px;font-size:10px;margin-left:6px">FOLLOW</span><div style="font-size:13px;margin-top:4px">${item.text}</div></div></div>
+        <div style="font-size:12px;opacity:.8">🎵 Original Audio • MGA • Tikdarai Swat</div>
+      </div>
+      <div class="right">
+        <div class="icon" onclick="like(this)">❤️<br><span style="font-size:10px">${item.likes}</span></div>
+        <div class="icon">💬<br><span style="font-size:10px">45</span></div>
+        <div class="icon">↗️<br><span style="font-size:10px">Share</span></div>
+        <div class="icon">💰</div>
+        <div class="avatar" style="width:50px;height:50px">M</div>
+      </div>
+    </div>`;
+  });
+}
+
+function addReel(input){
+  let file=input.files[0]; if(!file) return;
+  let reader=new FileReader();
+  reader.onload=e=>{
+    reelsData.push({text:'Mian ka naya Reel! 🔥 #MGA #Swat #Pakistan', img:e.target.result, likes: Math.floor(Math.random()*500)+1});
+    localStorage.setItem('mga_reels', JSON.stringify(reelsData));
+    coins+=100; localStorage.setItem('mian_coins',coins); document.getElementById('coins').innerText=coins;
+    render();
+    alert('Reel upload ho gaya! +100 Coins! 🎉\nAb neeche scroll karo - Insta jaisa!');
+  };
+  reader.readAsDataURL(file);
+}
+
+function like(el){
+  let count=parseInt(el.innerText.match(/\d+/)[0])+1;
+  el.innerHTML=`❤️<br><span style="font-size:10px">${count}</span>`;
+  coins+=5; localStorage.setItem('mian_coins',coins); document.getElementById('coins').innerText=coins;
+}
+
+render();
+</script>
+</body>
+</html>
